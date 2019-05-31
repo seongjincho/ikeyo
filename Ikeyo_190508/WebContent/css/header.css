@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+#header_div{
+	position: fixed;
+	width: 100%;
+	background-color: #FAFAFA;
+	/* height: 50px; */
+	border: 1px solid #D8D8D8;
+}
+
+#header_nav ul{
+	list-style: none;
+
+}
+
+#header_nav li{
+	float: left;
+
+}
+
+

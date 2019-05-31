@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="MyPage">
+  	<select id="myInfo" parameterType="kh.com.a.model.MemberDto" resultType="kh.com.a.model.MemberDto">
+  		SELECT *
+  		FROM MEMBER
+  		WHERE ID=#{id}
+  	</select>
+  	
+  	<select id="checkPwd" parameterType="kh.com.a.model.MemberDto" resultType="kh.com.a.model.MemberDto">
+  		SELECT *
+  		FROM MEMBER
+  		WHERE ID=#{id} AND PWD=#{pwd}
+  	</select>
+  	
+  	<select id="myPhone" parameterType="kh.com.a.model.MemberDto" resultType="kh.com.a.model.MemberDto">
+  		SELECT *
+  		FROM MEMBER
+  		WHERE ID=#{id} AND PHONE=#{phone}
+  	</select>
+  	
+  	<select id="phoneCheck" parameterType="kh.com.a.model.MemberDto" resultType="java.lang.String">
+  		SELECT PHONE
+  		FROM MEMBER
+  		WHERE PHONE=#{phone}
+  	</select>
+  	
+  	<update id="myInfoUpdate" parameterType="kh.com.a.model.MemberDto">
+  		UPDATE MEMBER SET
+  		PWD=#{pwd}, ADDRESS1=#{address1}, ADDRESS2=#{address2}, PHONE=#{phone}
+  		WHERE ID=#{id}
+  	</update>
+  	
+  	<update id="myInfoUp" parameterType="kh.com.a.model.MemberDto">
+  		UPDATE MEMBER SET
+  		PWD=#{pwd}, ADDRESS1=#{address1}, ADDRESS2=#{address2}
+  		WHERE ID=#{id}
+  	</update>
+  	
+  	<select id="getReviewList" parameterType="kh.com.a.model.MemberDto" resultType="kh.com.a.model.ReviewDto">
+  		select *
+  		from review
+  		where id=#{id} and del=0
+  	</select>
+  	
+  	<select id="getProductList" parameterType="kh.com.a.model.ReviewDto" resultType="kh.com.a.model.ProductDto">
+  		select *
+  		from product
+  		where model_id=#{model_id}
+  	</select>
+  	
+  	<select id="getQnAList" parameterType="kh.com.a.model.MemberDto" resultType="kh.com.a.model.QnADto">
+  		select *
+  		from QNA
+  		where id=#{id}
+  	</select>
+  	
+  	<select id="getProdList" parameterType="kh.com.a.model.QnADto" resultType="kh.com.a.model.ProductDto">
+  		select *
+  		from PRODUCT
+  		where PROD_SEQ=#{parent}
+  	</select>
+  	
+  	<select id="getReviewCount" parameterType="kh.com.a.model.MemberDto" resultType="java.lang.Integer">
+  		select NVL(count(*), 0)
+  		from REVIEW
+  		where id=#{id}
+  	</select>
+  	
+  	<select id="getReviewPagingList" parameterType="kh.com.a.model.PagingParam" resultType="kh.com.a.model.ReviewDto">
+  		SELECT REV_SEQ, MODEL_ID, ID, TITLE, CONTENT, STARPOINT, PHOTO_AF, WDATE, PARENT, DEL
+		FROM (SELECT ROW_NUMBER() OVER(ORDER BY REV_SEQ ASC) AS RNUM,
+  			REV_SEQ, MODEL_ID, ID, TITLE, CONTENT, STARPOINT, PHOTO_AF, WDATE, PARENT, DEL
+  			FROM REVIEW
+  			WHERE ID=#{id} AND DEL=0)
+			WHERE RNUM BETWEEN ${start} AND ${end}
+		ORDER BY REV_SEQ ASC
+  	</select>
+  	
+  	<select id="getQnACount" parameterType="kh.com.a.model.MemberDto" resultType="java.lang.Integer">
+  		select NVL(COUNT(*), 0)
+  		from QNA
+  		where id=#{id}
+  	</select>
+  	
+  	<select id="getQnAPagingList" parameterType="kh.com.a.model.PagingParam" resultType="kh.com.a.model.QnADto">
+  		SELECT QNA_SEQ, ID, TITLE, CONTENT, WDATE, ANSWER, ADATE, READCOUNT, PARENT, DEL
+		FROM (SELECT ROW_NUMBER() OVER(ORDER BY QNA_SEQ ASC) AS RNUM,
+  			QNA_SEQ, ID, TITLE, CONTENT, WDATE, ANSWER, ADATE, READCOUNT, PARENT, DEL
+  			FROM QNA
+  			WHERE ID=#{id})
+		WHERE RNUM BETWEEN ${start} AND ${end}
+		ORDER BY QNA_SEQ ASC
+  	</select>
+  </mapper>
