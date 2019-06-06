@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Order"> 
+<!-- 하나만 구매 -->
+<select id="oneOrderlist" parameterType="java.lang.Integer" resultType="kh.com.a.model.CartDto">
+	SELECT CART_SEQ, MODEL_ID, ID, CART_TYPE, COUNT
+	FROM CART
+	WHERE CART_SEQ=#{cart_seq3}
+</select>
+
+<!-- 상품사진 외 -->
+<select id="orderpList" resultType="kh.com.a.model.ProductDto">
+	SELECT MODEL_ID, P_NAME, PHOTO_AF1, PRICE
+	FROM PRODUCT
+</select>
+
+<!-- 선택 구매 -->
+<select id="twoOrderlist" parameterType="java.lang.Integer" resultType="kh.com.a.model.CartDto">
+	SELECT CART_SEQ, MODEL_ID, ID, CART_TYPE, COUNT
+	FROM CART
+	WHERE CART_SEQ=#{cart_seq4}
+</select>
+
+<!-- 주문정보  -->
+<insert id="order" parameterType="kh.com.a.model.Order_Dto">
+	INSERT INTO ORDER_(ORD_SEQ, ID, TOTAL_PRICE, ORDER_NUM, DELI_INFO, 
+	                   REGDATE, RNAME, ADDRESS1, ADDRESS2, PHONE, CONTENT)
+	VALUES(SEQ_ORDER.NEXTVAL, #{id}, #{total_price}, #{order_num}, #{deli_info},
+	       SYSDATE, #{rname}, #{address1}, #{address2}, #{phone}, #{content})                        
+</insert>
+
+<!-- 주문정보 상세 -->
+<insert id="orderdetail" parameterType="kh.com.a.model.Order_Sub_Dto">
+	INSERT INTO ORDER_SUB(ORDER_SUB_SEQ, MODEL_ID, COUNT, ORDER_NUM)
+	VALUES(SEQ_ORDER_SUB.NEXTVAL, #{model_id}, #{count}, #{order_num})
+</insert>
+
+<!-- 장바구니 비우기  -->
+<delete id="cartdelete" parameterType="java.lang.Integer">
+	DELETE FROM CART
+	WHERE CART_SEQ=#{sseq}
+</delete>
+
+<!-- 결제정보 -->
+<!-- 
+<select id="paymentlist" parameterType="java.lang.String" resultType="kh.com.a.model.Order_Dto">
+	SELECT ORD_SEQ, ID, TOTAL_PRICE, ORDER_NUM, DELI_INFO, 
+	       REGDATE, RNAME, ADDRESS1, ADDRESS2, PHONE, CONTENT
+	FROM ORDER_
+	WHERE ID=#{id}       
+</select>
+-->
+<select id="paymentlistto" parameterType="java.lang.String" resultType="kh.com.a.model.Order_Dto">
+   SELECT ORD_SEQ, ID, TOTAL_PRICE, ORDER_NUM, DELI_INFO, 
+          REGDATE, RNAME, ADDRESS1, ADDRESS2, PHONE, CONTENT
+   FROM ORDER_
+   WHERE ORDER_NUM=#{order_num}        
+</select>
+
+
+<update id="dellinfo" parameterType="kh.com.a.model.Order_Dto">
+	UPDATE ORDER_ SET DELI_INFO=1
+	WHERE ORD_SEQ=#{ord_seq}
+</update>
+
+<!-- // 재고-count -->
+<update id="minusCountInven" parameterType="kh.com.a.model.Order_Sub_Dto">
+	UPDATE INVENTORY SET COUNT=COUNT-#{count}
+	WHERE MODEL_ID=#{model_id}
+</update>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+

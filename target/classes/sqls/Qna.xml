@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="QnA">
+
+	<!-- QnA 리스트 -->
+	<select id="qnaList" parameterType="java.lang.Integer" resultType="kh.com.a.model.QnADto">
+		SELECT *
+		FROM QNA
+		WHERE PARENT=#{parent}
+	</select>
+	
+	<!-- QnA 전체리스트 -->
+	<select id="qnaListAll" resultType="kh.com.a.model.QnADto">
+		SELECT * 
+		FROM QNA	
+	</select>
+	
+	<!-- QnA 등록 -->
+	<insert id="qnaWrite" parameterType="kh.com.a.model.QnADto">
+		INSERT INTO QNA(QNA_SEQ, ID, TITLE, CONTENT, WDATE, ANSWER, ADATE, READCOUNT, PARENT, DEL)
+		VALUES(SEQ_QNA.NEXTVAL, #{id}, #{title}, #{content}, SYSDATE, NULL, SYSDATE, 0, #{parent}, 0)
+	</insert>
+
+	<!-- QnA 답글달기 -->
+	<update id="qnaAnswer" parameterType="kh.com.a.model.QnADto">
+		UPDATE QNA SET ANSWER=#{answer}, ADATE=SYSDATE
+		WHERE QNA_SEQ=#{qna_seq}
+	</update>
+	
+	 <select id="getQnAPagingList" parameterType="kh.com.a.model.BbsParam"
+	resultType="kh.com.a.model.QnADto">
+	SELECT QNA_SEQ, ID, CONTENT, WDATE, ANSWER, ADATE, READCOUNT, PARENT, DEL, TITLE
+	FROM
+		(SELECT ROW_NUMBER() OVER(ORDER BY QNA_SEQ ASC, ADATE ASC)AS RNUM,
+			QNA_SEQ, ID, CONTENT, WDATE, ANSWER, ADATE, READCOUNT,
+			 PARENT, DEL, TITLE
+		 FROM QNA
+		 WHERE DEL=0 AND 1=1
+		 <if test="s_category != null and s_category != ''
+		 		and s_keyword != null and s_keyword != ''">
+		 	
+		 	<if test="s_category == 'id'">
+		 		AND ID LIKE '%'||#{s_keyword}||'%'
+		 	</if>
+		 		 		
+		 </if> 
+		) A
+	WHERE RNUM BETWEEN ${start} AND ${end}	
+</select>
+
+<select id="getQnACount" parameterType="kh.com.a.model.BbsParam" resultType="java.lang.Integer">
+	
+	SELECT NVL(COUNT(*), 0) AS CNT
+	FROM QNA
+	WHERE DEL=0 AND 1=1
+	<if test="s_category != null and s_category != ''
+		 		and s_keyword != null and s_keyword != ''">		 	
+	 	<if test="s_category == 'id'">
+	 		AND ID LIKE '%'||#{s_keyword}||'%'
+	 	</if>
+	 			
+	 </if>  
+</select>
+	
+<select id="getModel_id" parameterType="java.lang.Integer" resultType="java.lang.String">
+		
+		SELECT MODEL_ID
+		FROM PRODUCT
+		WHERE PROD_SEQ=#{parent}
+
+</select>	
+
+
+</mapper>
+
+

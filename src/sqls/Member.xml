@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Member">
+  	<insert id="memberInsert" parameterType="kh.com.a.model.MemberDto">
+  		INSERT INTO MEMBER(ID, PWD, NAME, EMAIL, ADDRESS1, ADDRESS2,
+  							AUTH, PHONE, PAYPWD, DEL, GRADE, POINT, AUTHKEY, AUTHSTATUS)
+  		VALUES(#{id}, #{pwd}, #{name}, #{email}, #{address1}, #{address2},
+  				3, #{phone}, 0, 0, '일반', 1000, NULL, 0)
+  	</insert>
+  	
+  	<select id="idcheck" parameterType="java.lang.String" resultType="java.lang.String">
+  		SELECT ID
+  		FROM MEMBER
+  		WHERE ID=#{id}
+  	</select>
+  	
+  	<select id="emailcheck" parameterType="java.lang.String" resultType="java.lang.String">
+  		SELECT EMAIL
+  		FROM MEMBER
+  		WHERE EMAIL=#{email}
+  	</select>
+  	
+  	<select id="phonecheck" parameterType="java.lang.String" resultType="java.lang.String">
+  		SELECT PHONE
+  		FROM MEMBER
+  		WHERE PHONE=#{phone}
+  	</select>
+  	
+  	<select id="login" parameterType="kh.com.a.model.MemberDto" resultType="kh.com.a.model.MemberDto">
+  		SELECT *
+  		FROM MEMBER
+  		WHERE ID=#{id} AND PWD=#{pwd}
+  	</select>
+  	
+  	<update id="updateAuthKey" parameterType="kh.com.a.model.MemberDto">
+  		UPDATE MEMBER SET
+  		AUTHKEY=#{authkey}
+  		WHERE ID=#{id}
+  	</update>
+  	
+  	<update id="userAuth" parameterType="java.lang.String">
+  		UPDATE MEMBER SET
+  		AUTHSTATUS=1
+  		WHERE EMAIL=#{email}
+  	</update>
+  	
+  	<select id="findId" parameterType="kh.com.a.model.MemberDto" resultType="kh.com.a.model.MemberDto">
+  		SELECT ID
+  		FROM MEMBER
+  		WHERE name=#{name} AND EMAIL=#{email}
+  	</select>
+  	
+  	<update id="findPwd" parameterType="kh.com.a.model.MemberDto">
+  		UPDATE MEMBER SET
+  		PWD=#{pwd}
+  		WHERE id=#{id} AND EMAIL=#{email}
+  	</update>
+  	
+  	<insert id="naverLogin" parameterType="kh.com.a.model.MemberDto">
+  		INSERT INTO MEMBER(ID, PWD, NAME, EMAIL, ADDRESS1, ADDRESS2,
+  							AUTH, PHONE, PAYPWD, DEL, GRADE, POINT, AUTHKEY, AUTHSTATUS)
+  		VALUES(#{id}, '0000', #{name}, #{email}, #{address1}, NULL, 3, #{phone},
+  				0, 0, '일반', 1000, NULL, 1)
+  	</insert>
+  	
+  	<select id="naverLoginCount" parameterType="kh.com.a.model.MemberDto" resultType="java.lang.Integer">
+  		select NVL(COUNT(*), 0)
+  		from member
+  		where id=#{id} or email=#{email}
+  	</select>
+  	
+  	<select id="naverEmailCheck" parameterType="kh.com.a.model.MemberDto" resultType="kh.com.a.model.MemberDto">
+  		select *
+  		from member
+  		where email=#{email}
+  	</select>
+  	
+<select id="getMemberPagingList" parameterType="kh.com.a.model.BbsParam"
+	resultType="kh.com.a.model.MemberDto">
+	SELECT ID, PWD, NAME, EMAIL, ADDRESS1, ADDRESS2,
+  		   AUTH, PHONE, PAYPWD, DEL, GRADE, POINT, AUTHKEY, AUTHSTATUS
+	FROM
+		(SELECT ROW_NUMBER() OVER(ORDER BY GRADE DESC, AUTH ASC)AS RNUM,
+			ID, PWD, NAME, EMAIL, ADDRESS1, ADDRESS2,
+  			AUTH, PHONE, PAYPWD, DEL, GRADE, POINT, AUTHKEY, AUTHSTATUS
+		 FROM MEMBER
+		 WHERE DEL=0 AND 1=1
+		 <if test="s_category != null and s_category != ''
+		 		and s_keyword != null and s_keyword != ''">
+		 	
+		 	<if test="s_category == 'model_id'">
+		 		AND MODEL_ID LIKE '%'||#{s_keyword}||'%'
+		 	</if>
+		 	<if test="s_category == 'category'">
+		 		AND CATEGORY LIKE '%'||#{s_keyword}||'%'
+		 	</if>	 		
+		 </if> 
+		) A
+	WHERE RNUM BETWEEN ${start} AND ${end}	
+</select>
+
+<select id="getMemberCount" parameterType="kh.com.a.model.BbsParam" resultType="java.lang.Integer">
+	
+	SELECT NVL(COUNT(*), 0) AS CNT
+	FROM MEMBER
+	WHERE DEL=0 AND 1=1
+	<if test="s_category != null and s_category != ''
+		 		and s_keyword != null and s_keyword != ''">		 	
+	 	<if test="s_category == 'model_id'">
+	 		AND MODEL_ID LIKE '%'||#{s_keyword}||'%'
+	 	</if>
+	 	<if test="s_category == 'category'">
+	 		AND CATEGORY LIKE '%'||#{s_keyword}||'%'
+	 	</if>
+	 		
+	 </if>  
+</select>
+  	
+<update id="memberDel" parameterType="java.lang.String">
+  	UPDATE MEMBER SET
+	DEL=1
+	WHERE ID=#{id}
+</update>
+  </mapper>

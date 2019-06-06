@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Cart"> 
+<!-- 장바구니 리스트  -->
+<select id="cartlist" resultType="kh.com.a.model.CartDto">
+	SELECT CART_SEQ, MODEL_ID, ID, CART_TYPE, COUNT
+	FROM CART
+</select>
+
+<!-- 상품사진 외 -->
+<select id="pList" resultType="kh.com.a.model.ProductDto">
+	SELECT MODEL_ID, P_NAME, PHOTO_AF1, PRICE
+	FROM PRODUCT
+</select>
+
+<!-- 삭제 -->
+<delete id="cartdel" parameterType="java.lang.Integer">
+	DELETE FROM CART
+	WHERE CART_SEQ=#{cart_seq1}
+</delete>
+
+<!-- 선택 삭제 -->
+<delete id="cartdeltt" parameterType="java.lang.Integer">
+	DELETE FROM CART
+	WHERE CART_SEQ=#{cart_seq2}
+</delete>
+
+
+</mapper>
