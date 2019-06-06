@@ -51,6 +51,13 @@ public class AllOrderDaoImpl implements AllOrderDao {
 		
 		return n>0?true:false;
 	}
+
+	@Override
+	public boolean deliInfoFix(String ord_seq) {
+		
+		int n = sqlSession.update(ns + "deliInfoFix", ord_seq);
+		return n>0?true:false;
+	}
 	
 	
 	

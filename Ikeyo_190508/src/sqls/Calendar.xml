@@ -25,7 +25,7 @@
 
 <!-- 포인트 지급  -->
 <update id="upPoint" parameterType="kh.com.a.model.MemberDto">
-	UPDATE MEMBER SET POINT=POINT+300
+	UPDATE MEMBER SET POINT=POINT+3000
 	WHERE ID=#{id}
 </update>
 

@@ -23,14 +23,20 @@
   	<!-- 상품 갯수 -->
   	<select id="getProductCount" resultType="java.lang.Integer">
   		SELECT NVL(COUNT(*), 0) AS CNT
-  		FROM PRODUCT
+  		FROM PRODUCT P, INVENTORY I
+		WHERE P.MODEL_ID=I.MODEL_ID 
+  		<if test="category != null and category != ''">
+  			AND I.CATEGORY=#{category}
+  		</if>
   	</select>
   	
-  	<!-- <select id="getProductList" parameterType="java.lang.String" resultType="kh.com.a.model.ProductDto">
-  		SELECT P.PROD_SEQ, P.MODEL_ID, P.P_NAME, P.PHOTO_AF1, P.PRICE, P.RDATE, P.COUNT
-  		FROM PRODUCT P, INVENTORY I
-  		WHERE P.MODEL_ID = I.MODEL_ID AND I.CATEGORY=#{category}
-  	</select> -->
+  	<update id="productupdate" parameterType="kh.com.a.model.ProductDto">
+  		UPDATE PRODUCT SET P_NAME=#{p_name}, CONTENT=#{content}, PDF_BF=#{pdf_bf}, PDF_AF=#{pdf_af},
+  				 PHOTO_BF1=#{photo_bf1}, PHOTO_BF2=#{photo_bf2}, PHOTO_BF3=#{photo_bf3}, 
+			PHOTO_AF1=#{photo_af1}, PHOTO_AF2=#{photo_af2}, PHOTO_AF3=#{photo_af3}
+		WHERE MODEL_ID=#{model_id}
+  	
+  	</update>
 
 	
 	<!-- 장바구니리스트 -->  	
@@ -138,5 +144,12 @@
     	FROM INVENTORY 
     	WHERE MODEL_ID=#{model_id}
  	</select>
+ 	
+	<!-- 상품등록된 리스트 찾기 -->
+    <select id="getProductsearch" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM PRODUCT
+        WHERE MODEL_ID=#{model_id}        
+    </select>
 	
   </mapper>

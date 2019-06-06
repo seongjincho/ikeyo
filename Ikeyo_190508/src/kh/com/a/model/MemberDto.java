@@ -40,24 +40,29 @@ public class MemberDto implements Serializable {
 	   public MemberDto() {
 	   }
 
-	   public MemberDto(String id, String pwd, String name, String email, String address1, String address2, int auth,
-			String phone, int paypwd, int del, String grade, int point) {
-		super();
-		this.id = id;
-		this.pwd = pwd;
-		this.name = name;
-		this.email = email;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.auth = auth;
-		this.phone = phone;
-		this.paypwd = paypwd;
-		this.del = del;
-		this.grade = grade;
-		this.point = point;
-	}
+	   
+		public MemberDto(String id, String pwd, String name, String email, String address1, String address2, int auth,
+				String phone, int paypwd, int del, String grade, int point, String authkey, int authstatus, int naver) {
+			super();
+			this.id = id;
+			this.pwd = pwd;
+			this.name = name;
+			this.email = email;
+			this.address1 = address1;
+			this.address2 = address2;
+			this.auth = auth;
+			this.phone = phone;
+			this.paypwd = paypwd;
+			this.del = del;
+			this.grade = grade;
+			this.point = point;
+			this.authkey = authkey;
+			this.authstatus = authstatus;
+			this.naver = naver;
+		}
 
-	public String getId() {
+
+		public String getId() {
 	      return id;
 	   }
 
@@ -177,11 +182,14 @@ public class MemberDto implements Serializable {
 		this.naver = naver;
 	}
 
+
 	@Override
-	   public String toString() {
-	      return "MemberDto [id=" + id + ", pwd=" + pwd + ", name=" + name + ", email=" + email + ", address1=" + address1
-	            + ", address2=" + address2 + ", auth=" + auth + ", phone=" + phone + ", paypwd=" + paypwd + ", del="
-	            + del + "]";
-	   }
+	public String toString() {
+		return "MemberDto [id=" + id + ", pwd=" + pwd + ", name=" + name + ", email=" + email + ", address1=" + address1
+				+ ", address2=" + address2 + ", auth=" + auth + ", phone=" + phone + ", paypwd=" + paypwd + ", del="
+				+ del + ", grade=" + grade + ", point=" + point + ", authkey=" + authkey + ", authstatus=" + authstatus
+				+ ", naver=" + naver + "]";
+	}
+
 
 }

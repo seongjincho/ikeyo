@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import kh.com.a.dao.MyPageDao;
 import kh.com.a.model.MemberDto;
+import kh.com.a.model.Order_Dto;
+import kh.com.a.model.Order_Sub_Dto;
 import kh.com.a.model.PagingParam;
 import kh.com.a.model.ProductDto;
 import kh.com.a.model.QnADto;
@@ -101,5 +103,57 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		return myPageDao.getQnAPagingList(param);
 	}
+
+	// 주문내역 페이지
+	@Override
+	public List<Order_Dto> myorderpage(String id) {
+		return myPageDao.myorderpage(id);
+	}
+
+	@Override
+	public List<Order_Sub_Dto> getMySubOrder(String order_num) {
+		return myPageDao.getMySubOrder(order_num);
+	}
+
+	@Override
+	public ReviewDto getReviewModal(int seq) {
+		
+		return myPageDao.getReviewModal(seq);
+	}
+	
+	@Override
+	public List<Order_Dto> paymentlist_(String order_num) {
+		return myPageDao.paymentlist_(order_num);
+	}
+
+	@Override
+	public boolean plusCountInven(Order_Sub_Dto dto) {
+		return myPageDao.plusCountInven(dto);
+	}
+
+	@Override
+	public boolean deleteOrder(String order_num) {
+		myPageDao.deleteOrderSub(order_num);
+		return myPageDao.deleteOrder(order_num);
+	}
+
+	@Override
+	public boolean orderFix(String order_num) {
+		return myPageDao.orderFix(order_num);
+	}
+	
+   @Override
+   public boolean pointGradeUp(MemberDto dto) {
+      
+      return myPageDao.pointGradeUp(dto);
+   }
+
+   @Override
+   public MemberDto newSession(MemberDto dto) {
+      
+      return myPageDao.newSession(dto);
+   }
+	   
+
 	
 }

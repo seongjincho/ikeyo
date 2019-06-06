@@ -47,6 +47,13 @@ public class AllOrderServiceImpl implements AllOrderService {
 		
 		return allOrderDao.deliInfoUpdate(ord_seq);
 	}
+
+	@Override
+	public boolean deliInfoFix(String ord_seq) {
+		
+		return allOrderDao.deliInfoFix(ord_seq);
+	}
+	
 	
 	
 	

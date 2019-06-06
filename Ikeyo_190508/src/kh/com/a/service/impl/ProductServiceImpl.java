@@ -115,8 +115,16 @@ public class ProductServiceImpl implements ProductService {
 	public List<CartDto> ordercartSel(String id) {
 		return productDao.ordercartSel(id);
 	}
+
+	@Override
+	public boolean productupdate(ProductDto dto) {
+		return productDao.productupdate(dto);
+	}
 	
-	
+	@Override
+	public boolean productsearch(String model_id) {
+		return productDao.productsearch(model_id);
+	}
 	
 	
 	

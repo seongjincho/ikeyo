@@ -14,6 +14,39 @@
 <script type="text/javascript" src="./jquery/jquery.tablesorter.js"></script>	
 <script type="text/javascript" src="./jquery/jquery.tablesorter.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<style type="text/css">
+/* Button */
+
+.btn_s_blue{
+	border: none;
+	background-color: #0051ba;
+	color: #FFF;
+}
+.btn_s_blue:hover{
+	background-color: #0a3670
+}
+
+.btn_s_gray{
+	border: none;
+	background: #63666A;
+	color: #FFF;
+}
+
+.btn_s_gray:hover{
+	background-color: #4F5256;
+}
+
+.btn_100{
+	width: 100px; 
+	height: 30px;
+	font-size: 16px;
+}
+
+
+
+</style>
+
 <title>회원관리</title>
 </head>
 <body>
@@ -57,18 +90,18 @@ $(document).ready(function () {
 <%-- 아이디/ 이름/ 이메일 /주소/ 회원권한 /  전화번호/ 등급 /포인트 / 회원 삭제 
 	id,이름 으로 검색    core el tag 사용으로 뿌리기    del 0,1로 나눠서 조건을 세부적으로 준다   --%>
 <form id="mem_frm" method="post">
-<div align="center" style="margin-left: 5%; margin-right: 5%; margin-top: 10%;">
+<div align="center" style="margin-left: 5%; margin-right: 5%; margin-top: 10%; margin-bottom: 5%;">
 <h3>회원 관리 페이지</h3>
 <hr><br>
 
 
-<table border="1" id="list_table" class="tablesorter">
+<table id="list_table" class="tablesorter">
 
 <colgroup>
-	<col style="width: 10%">
-	<col style="width: 10%">
+	<col style="width: 8%">
+	<col style="width: 7%">
 	<col style="width: 15%">
-	<col style="width: 20%">
+	<col style="width: 25%">
 	<col style="width: 10%">
 	<col style="width: 15%">
 	<col style="width: 7%">
@@ -80,7 +113,7 @@ $(document).ready(function () {
 
 <thead>
 
-<tr align="center"  style="border: 3px solid deepskyblue;">
+<tr align="center"  style="border: 2px solid deepskyblue;">
 <th>아이디</th> <th>이름</th> <th>이메일</th> <th>주소</th> <th>회원권한</th>
 <th>전화번호</th> <th>등급</th> <th>포인트(p)</th> <th>회원삭제</th> 
 </tr>
@@ -97,7 +130,7 @@ $(document).ready(function () {
 <%--id, name, email, address1/2 , auth, phone, paywd(등록여부?), del, grade, point  --%>
 <c:if test="${not empty memberlist }">
 	<c:forEach items="${memberlist }" var="member" varStatus="vs">
-	<tr>
+	<tr style="vertical-align: middle;">
 	<c:if test="${member.del == 1 }">
 	<td align="center">${member.id } </td>
 	<td align="center">${member.name } </td>
@@ -111,7 +144,7 @@ $(document).ready(function () {
 		<input type="hidden" id="id" name="id" value="${member.id }"></td>
 		<td align="center">${member.name }</td>
 		<td align="center">${member.email }</td>
-		<td align="center">${member.address1 } ${member.address2}</td>
+		<td align="center">${member.address1 }<br> ${member.address2}</td>
 		<td align="center">
 		<c:if test="${member.auth == 3 }">
 		일반회원
@@ -125,7 +158,7 @@ $(document).ready(function () {
 		<td align="center">${member.phone }</td> 
 		<td align="center">${member.grade }</td> 
 		<td align="center">${member.point }</td> 
-		<td align="center"><a href="#" ><input type="button" onclick="goDelete()" value="del" style="width: 80%;"></a></td> 
+		<td align="center" valign="middle"><a href="#" ><input type="button" onclick="goDelete('${member.id }')" value="삭제" class="joinButton btn_s_gray btn_100" style="width: 100%; height: 25px;"></a></td> 
 
 		</c:if>
 	</tr>
@@ -135,20 +168,22 @@ $(document).ready(function () {
 </tbody>
 
 <tr>
-	<td colspan="9" style="text-align: center">
+	<td colspan="9" style="text-align: center;">
+	<br>
 	<select id="s_category" name="s_category">
 	<option value="" selected="selected">선택</option>
 	<option value="id">아이디</option>
 	<option value="name">이름</option>
 	</select>
 	<input type="text" id="s_keyword" name="s_keyword">
-	<input type="button" id="_btnSearch" value="검색">
+	<input type="button" id="_btnSearch" value="검색" class="joinButton btn_s_blue btn_100">
 	</td>
 
 </tr>
 
 </table>
 
+</div>
 <%-- controller로 넘겨주기 위한 처리 --%>
 <input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
 <input type="hidden" name="recordCountPerPage" id="_recordCountPerPage" value="${(empty recordCountPerPage)?10:recordCountPerPage }">
@@ -164,26 +199,54 @@ $(document).ready(function () {
 </div>
 
 
-</div>
+
 </form>
 
 <script type="text/javascript">
 
-function goDelete() {
+function goDelete(id) {
 	
-	var result = confirm('정말 삭제 하시겠습니까?'); 
-	
-	if(result) { 
-		
-	$("#mem_frm").attr("action","memberdel.do").submit();	
-		
-	}else{
-		
-		
-		
-		}
-	
-}
+	  var id = id;
+	   //alert(id);
+	   
+	   var result = confirm('정말 삭제 하시겠습니까?'); 
+	   
+	   if(result) { 
+	      
+	      $.ajax({
+	         url:"memberdel.do",
+	         type:"post",
+	         //data:"model_id=" + model_id,
+	         data:{ id:id },
+	         success:function(data){
+	            alert("success");
+	            //alert(data);
+	            if(data.trim() == "\"삭제 성공\""){
+	               
+	               //alert(data);
+	               location.reload();
+	               
+	               
+	            }else{
+	               alert(data);
+
+	            }
+	         },
+	         error:function(r, s, err){
+	            alert("error");
+	         }
+	      });   
+	/*       
+	   $("#mem_frm").attr("action","memberdel.do").submit();    */
+	      
+	   }else{
+	      
+	      
+	      
+	      }
+	   
+	}
+
 
 $(document).ready(function(){ 
 	$("#list_table").tablesorter();
@@ -200,7 +263,7 @@ function goPage(pageNumber) {
 
 $("#_btnSearch").click(function () {
 
-	alert("click!");
+	//alert("click!");
 	$("#_pageNumber").val("0");
 
 	$("#inven_frm").attr("action", "memberlist.do").submit();

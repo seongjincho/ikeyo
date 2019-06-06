@@ -15,4 +15,5 @@ public interface AllOrderService {
 	public Order_Dto getDetail(String order_num);
 	public List<Order_Sub_Dto> getDetail_sub(String order_num);
 	public boolean deliInfoUpdate(String ord_seq);
+	public boolean deliInfoFix(String ord_seq);
 }

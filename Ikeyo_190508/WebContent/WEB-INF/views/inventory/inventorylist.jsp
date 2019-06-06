@@ -64,11 +64,11 @@ $(document).ready(function () {
 <!--  품명(모델번호) / 카테고리 / 수량 / 등록일 / 가격
     모델번호 카테고리    |       |  검색 -->
 
-<div align="center"  style="margin-left: 10%; margin-right: 10%; margin-top: 10%;">
+<div align="center"  style="margin-left: 15%; margin-right: 15%; margin-top: 10%;">
 <h3>Inventory List</h3>
 <hr><br>
 <form action="" id="inven_frm" name="inven_frm" method="post">
-<table border="2" width="100%" height="100%" id="list_table" class="tablesorter">
+<table width="100%" height="100%" id="list_table" class="tablesorter">
 
 <colgroup>
 	<col style="width: 15%">
@@ -124,6 +124,7 @@ $(document).ready(function () {
 </tbody>
 <tr>
 	<td colspan="4" style="text-align: center">
+	<br>
 	<select id="s_category" name="s_category">
 	<option value="" selected="selected">선택</option>
 	<option value="model_id">모델번호</option>
@@ -133,6 +134,7 @@ $(document).ready(function () {
 	<input type="button"  class="joinButton btn_s_blue btn_100" id="_btnSearch" value="검색">
 	</td>
 	<td align="center">
+	<br>
 	<input type="button" class="joinButton btn_s_blue btn_100" value="글쓰기" onclick="goWrite()"> 
 	</td>
 </tr>

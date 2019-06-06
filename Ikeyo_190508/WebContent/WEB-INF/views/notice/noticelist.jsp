@@ -4,12 +4,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:requestEncoding value="utf-8"/>
 
+<!-- content.css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/content.css">
+
 
 <style>
 .headtitle p {
     font-size: 35px;
-    margin-bottom: 50px;
-    padding-top: 80px;
+    margin-bottom: 70px;
+    padding-top: 130px;
+    text-align: center;
 }
 
 table.noti {
@@ -36,11 +40,42 @@ table.noti {
     letter-spacing: -1px;
     border-top: 1px #aaa solid;
     border-bottom: 1px solid #f0f0f0;
-    height: 25px;
-    font-size: 13px;
+    height: 55px;
+    font-size: 16px;
     color: #aaa;
     text-align: center;
 }
+
+.btnsearch{
+	margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70px;
+    height: 30px;
+    font-size: 16px;
+    border: 1px solid #000;
+    background-color: #f0f0f0;
+    color: black;
+}
+
+.btnwrite{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background-color: #0051ba;
+    color: #FFF;
+}
+
+
+
+
+
 </style>
 
 
@@ -62,17 +97,22 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="headtitle">
-	<p>공지사항</p>
+<div class="f_content" style="background-color: white; margin-bottom: 20%;">
+<div class="f2_content" style="background-color: white;">
+
+<div class="headtitle" align="center"><br><br>
+	<!-- <p style="color: black;">공지사항</p> -->
+	<h2>공지사항</h2>
+	<br>
 </div>
 
 
 <!-- arrow생성 -->
 <jsp:useBean id="ubbs" class="kh.com.a.util.BbsArrow"/>
 
+<div align="center">
 <table class="noti">
-
-<thead>
+<thead style="font-size: 16px;">
 	<tr class="noto">
 		<th width="10%">순서</th>
 		<th width="50%">제목</th>
@@ -109,21 +149,32 @@ $(document).ready(function(){
 	</tr>
 	<tr id="content${vs.index }" class="content" style="display:none;">
 		<td colspan="5">
-			<div id="slide${vs.index }" class="slide" style="padding: 10% 10% 10% 10%; text-align:left;">
+			<div id="slide${vs.index }" class="slide" style="padding: 10% 10% 10% 10%; text-align:left; background-color: #f0f0f0;">
 				<pre><font size="3px">${bbs.content }</font></pre>
 				<c:if test="${login.auth == 1 }">
-					<div>
-						<button id="updateBtn" onclick="location.href='noticeUpdate.do?seq=${bbs.noti_seq }'">수정</button>
-						<button id="deleteBtn" onclick="location.href='noticeDelete.do?seq=${bbs.noti_seq }'">삭제</button>
+					<div align="center">
+						<button id="updateBtn" class="btnsearch" onclick="location.href='noticeUpdate.do?seq=${bbs.noti_seq }'">수정</button>
+						<button id="deleteBtn" class="btnsearch" onclick="location.href='noticeDelete.do?seq=${bbs.noti_seq }'">삭제</button>
 					</div>
 				</c:if>
 			</div>
 		</td>
 	</tr>
 	</c:forEach>
+	<c:if test="${login.auth eq 1 }">
+		<tr>
+			<td colspan="6" style="border: 1px solid #fff">
+				<div align="center">
+					<span>
+						<button type="button" id="_btnAdd" class="btnwrite" style="border-color: #0051ba;">글쓰기</button>
+					</span>
+				</div>
+			</td>
+		</tr>
+	</c:if>
 </tbody>
 </table>
-
+<br>
 <!-- 페이징 처리 -->
 <div id="paging_wrap">
 	<jsp:include page="/WEB-INF/views/notice/paging.jsp" flush="false">
@@ -133,20 +184,23 @@ $(document).ready(function(){
 		<jsp:param value="${totalRecordCount }" name="totalRecordCount"/>
 	</jsp:include>
 </div>
+<br>
 
+<div align="center" style="width: 100%;">
 
-<div style="margin-top: 5px; margin-bottom: 10px;">
+<div align="center" style="margin-top: 20px; margin-bottom: 10px;
+	margin-left: 400px;">
 
 <form action="" name="frmForm1" id="_frmFormSearch" method="post">
 
 <table style="margin-left: auto; margin-right: auto;
-		margin-top:	3px; margin-bottom: 3px;">
-
+		margin-top:	3px; margin-bottom: 3px; float: left;">
+	
 	<tr>
-		<td>검색:</td>
+		<td>검색:&nbsp;&nbsp;</td>
 		<td style="padding-left:5px;">
 			<select id="_s_category" name="s_category">
-				<option value="" selected="selected">선택</option>
+				<option value="" selected="selected">선택&nbsp;&nbsp;</option>
 				<option value="title">제목</option>
 				<option value="contents">내용</option>
 				<!-- <option value="writer">작성자</option> -->
@@ -157,7 +211,7 @@ $(document).ready(function(){
 		</td>
 		<td style="padding-left: 5px;">
 			<span class="button blue">
-				<button type="button" id="_btnSearch">검색</button>
+				<button type="button" id="_btnSearch" class="btnsearch">검색</button>
 			</span>
 		</td>
 	</tr>
@@ -169,13 +223,18 @@ $(document).ready(function(){
 
 </form>
 </div>
-
-
-<div id="buttons_wrap">
-	<span>
-		<button type="button" id="_btnAdd">글쓰기</button>
-	</span>
 </div>
+
+</div>
+</div>
+
+
+
+
+
+<br><br><br><br><br><br><br>
+</div>
+
 
 
 <script type="text/javascript">

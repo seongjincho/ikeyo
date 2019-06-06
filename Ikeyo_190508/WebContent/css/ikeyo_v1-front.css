@@ -114,7 +114,7 @@
 }
 
 #info .insert .pwd input{
-	width: 140px; 
+	width: 170px; 
 	margin-bottom: 0px;
 	border: none;
 }
@@ -516,7 +516,7 @@
 }
 
 #updateMyInfo .insert .pwd input{
-	width: 140px;
+	width: 170px;
 	margin-bottom: 0px;
 	border: none;
 }

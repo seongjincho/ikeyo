@@ -55,6 +55,11 @@ input,textarea{
 	height: 30px;
 	font-size: 14px;
 }
+td,tr{
+font-size: 16px;
+ font-family: 'Noto Sans KR'; 
+ font-weight: 800;
+}
 
 </style>
 
@@ -72,37 +77,44 @@ input,textarea{
 <hr><br><br>
 <form id="inven_frm" method="post">
 <table style="height: 100%; width: 100%;"> 
-
+<colgroup>
+	<col style="width: 20%">
+	<col style="width: 80%">
+</colgroup>	
 
 <input type="hidden" id="inven_seq" name="inven_seq" value="${inven.inven_seq }">
 
 
-<tr>
-	<td>모델명:<input type="text" size="50" id="model_id" name="model_id" 
-	value="${inven.model_id }" readonly="readonly">
+<tr align="center">
+	<td>모델명<hr></td>
+	<td>${inven.model_id }<input type="hidden" size="50" id="model_id" name="model_id" 
+	value="${inven.model_id }" >
 	<hr></td>
 	
 </tr>
 
-<tr>  
-	<td> 
-		카테고리:<input id="category" name="category"  value="${inven.category }" readonly="readonly"> 
+<tr align="center">  
+	<td>카테고리<hr></td>
+	<td>${inven.category }<input type="hidden" id="category" name="category"  value="${inven.category }" > 
 	<hr></td>
 </tr>
 
-<tr>   
-	<td>수량:<input type="number" id="count" name="count" 
-	size="50" min="1" max="1000" value="${inven.count }" readonly="readonly">개
+<tr align="center">   
+	<td>수량<hr></td>
+	<td>
+	<input type="hidden" id="count" name="count" 
+	size="50" min="1" max="1000" value="${inven.count }">${inven.count }개
 	<hr></td>
 </tr>
 
-<tr>  
-	<td><input type="text" id="price" name="price" value="${inven.price }" readonly="readonly">원
+<tr align="center">  
+	<td>가격<hr></td>
+	<td><input type="hidden" id="price" name="price" value="${inven.price }">${inven.price }원
 	<hr></td>
 </tr>
 
 <tr>
-	<td align="center">
+	<td align="center" colspan="2">
 	<input type="button" value="Update"  class="joinButton btn_s_blue btn_100" onclick="goUpdate()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<input type="button" value="Cancel" class="joinButton btn_s_blue btn_100" onclick="window.close()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<input type="button" value="Delete"  class="joinButton btn_s_blue btn_100" onclick="goDelete()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -249,15 +261,14 @@ function memoWrite() {
 
 function memoDelete(memo_seq) {
 	
-	var result = confirm('정말 삭제 하시겠습니까?'); 
 	
-	if(result) { 
+	if(confirm('정말 삭제 하시겠습니까?')) { 
 	
 	
 	$.ajax({
 		url:"memoDelete.do",
 		type:"post",
-		data:{ memo_seq:memo_seq},
+		data:{ "memo_seq":memo_seq},
 		success:function(data){
 			//alert("success");
 			//alert(data);

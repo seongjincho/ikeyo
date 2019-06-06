@@ -22,7 +22,7 @@ public class NaverLoginBO {
 	state: 애플리케이션이 생성한 상태 토큰*/
 	private static final String CLIENT_ID = "7Aw7poVc4DiXisY9fEze";
 	private static final String CLIENT_SECRET = "eKqass7Wtn";
-	private static final String REDIRECT_URI = "http://localhost:8090/Ikeyo_190508/naverIdCheck.do";
+	private static final String REDIRECT_URI = "http://192.168.10.72:8090/Ikeyo_190508/naverIdCheck.do";
 	private static final String SESSION_STATE = "oauth_state";
 	/*프로필 조회 API URL*/
 	private static final String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";

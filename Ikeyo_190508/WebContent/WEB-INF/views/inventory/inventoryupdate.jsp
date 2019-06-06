@@ -42,7 +42,7 @@ input,textarea{
 
 .btn_50{
 	width: 100px;
-	height: 40px;
+	height: 20px;
 	font-size: 16px;
 }
 
@@ -56,57 +56,63 @@ input,textarea{
 
 
 
-<div align="center">
+<div align="center" style="margin-left: 5%; margin-right: 5%;" >
 <h3>Inventory Update</h3>
 <hr><br><br>
 <form action="inventoryupdateAf.do">
-<table> 
+<table style="height: 100%; width: 100%;"> 
+
+<colgroup>
+	<col style="width: 20%">
+	<col style="width: 80%">
+</colgroup>
 
 <input type="hidden" id="inven_seq" name="inven_seq" value="${inven.inven_seq }">
 
 <tr>
-	<td>모델명:<input type="text" size="50" id="model_id" name="model_id" 
-	value="${inven.model_id }" >
-	<input type="button" value="Check"  class="joinButton btn_s_blue btn_100" onclick="inventoryCheck()">
-	<div id="_model_id"></div>
-	<hr>
-	</td>
+	<td>모델명<hr></td>
+	<td>&nbsp;&nbsp;${inven.model_id }
+	<input type="hidden" size="10" id="model_id" name="model_id" 
+	value="${inven.model_id }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<!-- <input type="button" value="Check" style="vertical-align: top;"  class="joinButton btn_s_blue btn_50" onclick="inventoryCheck()"> -->
+	
+	<hr></td>
 	
 </tr>
 
 <tr>  
-	<td> 
-		카테고리:<select id="category" name="category" > 
+	<td>카테고리<hr></td>
+	<td>&nbsp;&nbsp;
+	<select id="category" name="category" > 
 
-		<option value="침대" ${inven.category eq '침대'?"selected='selected'":""  }>침대</option>
-		<option value="매트릭스" ${inven.category eq '매트릭스'?"selected='selected'":""  }>매트릭스</option>
-		<option value="의자" ${inven.category eq '의자'?"selected='selected'":""  }>의자</option>
-		<option value="소파" ${inven.category eq '소파'?"selected='selected'":""  }>소파</option>
-		<option value="옷장" ${inven.category eq '옷장'?"selected='selected'":""  }>옷장</option>
-		<option value="수납장" ${inven.category eq '수납장'?"selected='selected'":""  }>수납장</option>
-		<option value="책상" ${inven.category eq '책상'?"selected='selected'":""  }>책상</option>
-		<option value="테이블" ${inven.category eq '테이블'?"selected='selected'":""  }>테이블</option>
-		<option value="액세서리" ${inven.category eq '액세서리"'?"selected='selected'":""  }>액세서리</option>
-	
+		<option value="책상/테이블" ${inven.category eq '책상/테이블'?"selected='selected'":""  }>책상/테이블</option>
+		<option value="침대/매트리스" ${inven.category eq '침대/매트리스'?"selected='selected'":""  }>침대/매트리스</option>
+		<option value="의자/소파" ${inven.category eq '의자/소파'?"selected='selected'":""  }>의자/소파</option>
+		<option value="옷장/수납장" ${inven.category eq '옷장/수납장'?"selected='selected'":""  }>옷장/수납장</option>
+		<option value="액세서리" ${inven.category eq '액세서리'?"selected='selected'":""  }>액세서리</option>
 		</select> 
-		<hr>
-	</td>
+		<hr></td>
 </tr>
 
 <tr>    
-	<td>수량:&nbsp;&nbsp;<a href="#" class="joinButton btn_s_blue btn_30" onclick="minusCount()"><img alt="" src="./image/btn_pre.gif"></a>&nbsp;&nbsp;
+	<td>수량<hr></td>
+	<td>&nbsp;&nbsp;
+	<a href="#" class="joinButton btn_s_blue btn_30" onclick="minusCount()"><img alt="" src="./image/btn_pre.gif"></a>&nbsp;&nbsp;
 	<input type="text" id="count" name="count" value="${inven.count }" size="5">개&nbsp;&nbsp;
 	<a href="#" class="joinButton btn_s_blue btn_30" onclick="plusCount()"><img alt="" src="./image/btn_next.gif"></a>
 	<hr></td>
 </tr>
 
 <tr>  
-	<td><input type="text" id="price" name="price" value="${inven.price }" >원
+	<td>가격<hr></td>
+	<td>&nbsp;&nbsp;
+	<input type="text" id="price" name="price" value="${inven.price }" size="20" >원
 	<hr></td>
 </tr>
 
 <tr>
-	<td align="center"><input type="button" value="Update" class="joinButton btn_s_blue btn_100" onclick="goUpdateAf()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<td align="center" colspan="2">&nbsp;&nbsp;
+	<input type="button" value="Update" class="joinButton btn_s_blue btn_100" onclick="goUpdateAf()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<input type="button" value="Cancel" class="joinButton btn_s_gray btn_100" onclick="goBack()">
 	<hr></td>
 </tr>
@@ -130,17 +136,19 @@ function inventoryCheck() {
 		success:function(data){
 			//alert("success");
 			//alert(data);
-			if(data.trim() == "OK"){
+			if(data.trim() == "\"OK\""){
 				
-				$("#_model_id").css("color", "#0000ff")
-				$("#_model_id").html("사용할 수 있는 모델명입니다");
+/* 				$("#_model_id").css("color", "#0000ff")
+				$("#_model_id").html("사용할 수 있는 모델명입니다"); */
+				alert("등록할 수 있는 모델명입니다");
 				$("#model_id").val(model_id); 
 				
 			}else{
 				
-				$("#_model_id").css("color", "#ff0000")
-				$("#_model_id").html("사용 중인 모델명입니다");
-				$("#model_id").val(""); 
+/* 				$("#_model_id").css("color", "#ff0000")
+				$("#_model_id").html("이미 등록 되어있는 모델명입니다"); */
+				alert("이미 등록 되어있는 모델명입니다"); 
+				$("#model_id").focus();
 			}
 		},
 		error:function(r, s, err){

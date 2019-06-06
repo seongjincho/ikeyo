@@ -14,31 +14,31 @@
 			<ul class="footer_inner_box">
 			
 				<li class="footer_inner_item">
-				    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img width="200px" height="70px" src="image/ikeyo.jpg">
 				</li>	
 				
 				<li class="footer_inner_item">
 					<ul>
 						<li class="item_title noto">ABOUT</li>
-						<li class="f12"><b><a class="noto" href="/company/brandStory.do" style="color: gray;">회사소개</a></b></li>
-						<li class="f12"><b><a class="noto" href="/store/storeInfo.do" style="color: gray;">매장안내</a></b></li>
-						<li class="f12"><b><a class="noto" href="https://recruit.fursys.com:4431/main.do?command=getMain" style="color: gray;">인재채용</a></b></li>
+						<li class="f12"><b><a class="noto" href="brandStory.do" onclick="window.open(this.href, '', 'width=1300,height=600'); return false;" style="color: gray;">회사소개</a></b></li>
+                  		<li class="f12"><b><a class="noto" href="storeInfo.do" style="color: gray;">매장안내</a></b></li>
+                  		<li class="f12"><b><a class="noto" href="#" style="color: gray;">인재채용</a></b></li>
 					</ul>
 				</li>
 				<li class="footer_inner_item">
 					<ul>
 						<li class="item_title noto">SUPPORT</li>
-						<li class="f12"><b><a class="noto" href="/customer/main.do" style="color: gray;">고객센터</a></b></li>
-						<li class="f12"><b><a class="noto" href="/agency/procedure.do" style="color: gray;">대리점 개설안내</a></b></li>
+						<li class="f12"><b><a class="noto" href="customlist.do" style="color: gray;">고객센터</a></b></li>
+                  		<li class="f12"><b><a class="noto" href="#"  style="color: gray;">대리점 개설안내</a></b></li>
 					</ul>
 				</li>
 				
 				<li class="footer_inner_item">
 					<ul>
 						<li class="item_title noto">INFO</li>
-						<li class="f12"><b><a class="noto" href="/policy/termsOfUse.do" style="color: gray;">이용약관</a></b></li>
-						<li class="f12"><b><a class="noto" href="/policy/privacy.do" style="color: gray;">개인정보 처리방침</a></b></li>
+						<li class="f12"><b><a class="noto" href="privacy1.do"  onclick="window.open(this.href, '', 'width=1300,height=600'); return false;" style="color: gray;">웹 사이트 이용약관</a></b></li>
+                  		<li class="f12"><b><a class="noto" href="privacy2.do" onclick="window.open(this.href, '', 'width=1300,height=600'); return false;" style="color: gray;">개인정보 처리방침</a></b></li>
 					</ul>
 				</li>
 				
@@ -61,17 +61,17 @@
 			<ul class="footer_inner_box">
 				<li class="footer_inner_item">
 					<div style="margin-bottom: 10px;">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="https://www.instagram.com/iloom_official/" target="_blank">
+						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+						<a href="https://www.instagram.com/iloom_official/" target="_blank" style="text-decoration: none;">
 							<img src="image/footer_i.png">
 						</a>
 					
 						&nbsp;
-						<a href="https://www.facebook.com/myiloom/" target="_blank">
+						<a href="https://www.facebook.com/myiloom/" target="_blank" style="text-decoration: none;">
 							<img src="image/footer_f.png">
 						</a>
 						&nbsp;
-						<a href="http://blog.naver.com/iloom_blog/" target="_blank">
+						<a href="http://blog.naver.com/iloom_blog/" target="_blank" style="text-decoration: none;">
 							<img src="image/footer_b.png">
 						</a>
 					</div>
@@ -84,12 +84,11 @@
 						<li class="f12 noto" style="color: gray;">사업자등록번호 : 215-86-12345·통신판매업신고 : 2019-서울역삼-0069호·부가통신사업신고필증 : 021129</li>
 						<li class="f12 arial" style="color: gray;">webmaster@ikeyo.com·Copyright (c) 2019 ikeyo lnc. All rights reserved</li>
 					</ul>
-				
 				</li>
-				
 			</ul>
 		</li>
 		
 	</ul>
 	
 </div>
+

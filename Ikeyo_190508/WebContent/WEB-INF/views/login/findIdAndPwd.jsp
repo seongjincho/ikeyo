@@ -107,12 +107,10 @@ $('#_btnRegi').click(function() {
 			if(data.trim() == "NO") {
 				alert("이름과 이메일을 다시 확인해주세요");
 			} else {
-				alert("ID는 " + data + "입니다");
 				$(".findId .enter").hide();
 				$(".resultCmt").text("회원님의 계정 아이디는\n\n" + data + "입니다.");
 				$(".resultCmt").show();
 				$(".buttonDiv3").show();
-				/* location.href = "login.do"; */
 			}
 		},
 		error:function(xhr, textStatus, err) {

@@ -38,6 +38,10 @@
 <definition name="emailConfirm.tiles" extends="main.tiles">
 	<put-attribute name="content" value="/WEB-INF/views/login/emailConfirm.jsp"/>
 </definition>
+<!-- 탈퇴 페이지 -->
+<definition name="leave.tiles" extends="main.tiles">
+	<put-attribute name="content" value="/WEB-INF/views/login/leave.jsp"/>
+</definition>
 
 <!-- 상품리스트 화면 -->
 <definition name="productList.tiles" extends="main.tiles">
@@ -94,13 +98,10 @@
 <!-- 재고  수정-->
 <definition name="inventoryupdate.tiles" template="/WEB-INF/views/inventory/inventoryupdate.jsp"/>
 
-
 <!-- 출석체크(calendar) 화면 -->
-<definition name="calendar.tiles" template="/WEB-INF/views/calendar/calendar.jsp"/>
-
-<!-- calwrite로 연결  -->
-<definition name="calwrite.tiles" template="/WEB-INF/views/calendar/calwrite.jsp"/>
-
+<definition name="calendar.tiles" extends="main.tiles">
+	<put-attribute name="content" value="/WEB-INF/views/calendar/calendar.jsp"/>
+</definition>
 
 <!-- admin   -->
 
@@ -131,9 +132,17 @@
 </definition>
 
 <!-- 공지사항 -->
+ 
 <definition name="noticelist.tiles" extends="main.tiles">
 	<put-attribute name="content" value="/WEB-INF/views/notice/noticelist.jsp"/>
 </definition>
+
+
+<!-- <definition name="noticelist.tiles" template="/WEB-INF/views/layouts-tiles2.jsp">
+   <put-attribute name="left_menu" value="/WEB-INF/views/common/left_menu.jsp"/>
+   <put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+   <put-attribute name="content" value="/WEB-INF/views/notice/noticelist.jsp"/>
+</definition> -->
 
 <definition name="noticeUpdate.tiles" extends="main.tiles">
 	<put-attribute name="content" value="/WEB-INF/views/notice/noticeupdate.jsp"/>
@@ -210,19 +219,31 @@
 </definition>
 
 <!-- 위시리스트 -->
-<definition name="wishList.tiles" template="/WEB-INF/views/wishlist/wishList.jsp"/>
+<definition name="wishList.tiles" extends="main.tiles">
+	<put-attribute name="left_menu" value="/WEB-INF/views/common/left_menu_mypage.jsp"/>
+	<put-attribute name="content" value="/WEB-INF/views/wishlist/wishList.jsp"/>
+</definition>
 
 <!-- 장바구니 -->
-<definition name="cartlist.tiles" template="/WEB-INF/views/cart/cart.jsp"/>
+<definition name="cartlist.tiles" extends="main.tiles">
+	<put-attribute name="left_menu" value="/WEB-INF/views/common/left_menu_mypage.jsp"/>
+	<put-attribute name="content" value="/WEB-INF/views/cart/cart.jsp"/>
+</definition>
 
-<!-- 장바구니 에서 주문서로 이동 -->
-<definition name="orderlist.tiles" template="/WEB-INF/views/order/orderlist.jsp"/>
+<!-- 주문서 -->
+<definition name="orderlist.tiles" extends="main.tiles">
+	<put-attribute name="content" value="/WEB-INF/views/order/orderlist.jsp"/>
+</definition>
 
 <!-- 결제페이지 이동 -->
-<definition name="payment.tiles" template="/WEB-INF/views/order/payment.jsp"/>
+<definition name="payment.tiles" extends="main.tiles">
+	<put-attribute name="content" value="/WEB-INF/views/order/payment.jsp"/>
+</definition>
 
 <!-- 결제완료 페이지 -->
-<definition name="success.tiles" template="/WEB-INF/views/order/success.jsp"/>
+<definition name="success.tiles" extends="main.tiles">
+	<put-attribute name="content" value="/WEB-INF/views/order/success.jsp"/>
+</definition>
 
 <!-- 주문  관리  -->
 <definition name="allorderlist.tiles" extends="mypage.tiles">
@@ -230,8 +251,15 @@
 </definition> 
 <definition name="allorderdetail.tiles" template="/WEB-INF/views/admin/allorderdetail.jsp"/>
 
+<!-- 마이페이지(주문내역보기) -->
+<definition name="myorder.tiles" extends="mypage.tiles">
+	<put-attribute name="content" value="/WEB-INF/views/mypage/myorder.jsp"/>
+</definition>    
 
-
+<!-- company -->
+<definition name="privacy1.tiles" template="/WEB-INF/views/company/privacy1.jsp"/>
+<definition name="privacy2.tiles" template="/WEB-INF/views/company/privacy2.jsp"/>
+<definition name="brandStory.tiles" template="/WEB-INF/views/company/brandStory.jsp"/>
 
 
 </tiles-definitions>

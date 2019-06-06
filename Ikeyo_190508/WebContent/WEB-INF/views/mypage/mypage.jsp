@@ -38,11 +38,13 @@
 					</div>
 					<div class="pwd">
 						<div>
-							<input type="password" name="pwd" id="_pwd" class="first" data-msg="패스워드를" autocomplete="off" placeholder="비밀번호">
+							<input type="password" name="pwd" id="_pwd" class="first"
+								data-msg="패스워드를" autocomplete="off" placeholder="비밀번호" maxlength="15">
 							<p></p>
 						</div>
 						<div>
-							<input type="password" id="_pwdchk" class="second" data-msg="패스워드 확인을" placeholder="비밀번호 확인 " disabled="true">
+							<input type="password" id="_pwdchk" class="second"
+								data-msg="패스워드 확인을" placeholder="비밀번호 확인 " disabled="true" maxlength="15">
 							<p></p>
 						</div>
 					</div>
@@ -86,7 +88,11 @@ var checkPw2Gb = ""
 var checkAddrGb = "N";
 
 $("#_btnInfo").click(function(){
-	if(checkPhoneGb != 'Y' && $("#_phone").val() != '${login.phone}'){
+	if($("#_phone").val() == ""){
+		alert("전화번호를 입력해주세요.\n빈칸은 안됩니다.");
+		checkPhoneGb = 'N';
+		return false;
+	}else if(checkPhoneGb != 'Y' && $("#_phone").val() != '${login.phone}'){
 		alert("전화번호 중복체크를 해주세요.");
 		return false;
 	} else if(checkAddrGb != 'Y' && $("#sample2_address").val() == ""){
@@ -154,7 +160,7 @@ $(".first").keyup(function(){
 	var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 	var str_space = /\s/;
 	
-	/* if(pw.length < 6 || 15 < pw.length){
+	if(pw.length < 6 || 15 < pw.length){
 		$(".pwd div:nth-child(1)>p").text("6자리 ~ 15자리 이내로 입력해주세요.");
 		checkPw1Gb = 'N'
 	} else if(str_space.exec(pw)){
@@ -168,12 +174,7 @@ $(".first").keyup(function(){
 		$(".second").attr("disabled", false);
 		$(".pwd div:nth-child(2)").css("background-color", "white");
 		checkPw1Gb = 'Y'
-	} */
-	
-	$(".pwd div:nth-child(1)>p").text("사용 가능한 비밀번호입니다.");
-	$(".second").attr("disabled", false);
-	$(".pwd div:nth-child(2)").css("background-color", "white");
-	checkPw1Gb = 'Y'
+	}
 	
 	if((pw2.length > 0) && (pw != pw2)){
 		$(".pwd div:nth-child(2)>p").text("비밀번호가 서로 다릅니다.");
@@ -216,6 +217,7 @@ function checkPhone(){
 			if(data.OK == "OK"){
 				alert("사용 가능한 핸드폰입니다.");
 				$('#_btnInfo').removeAttr("disabled");
+				checkPhoneGb = "Y";
 			} else{
 				if(data.MY == "MYPHONE"){
 					alert("기존에 등록된 핸드폰입니다.");

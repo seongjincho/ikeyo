@@ -1,8 +1,10 @@
 package kh.com.a.controller;
 
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -28,8 +30,7 @@ public class CartController {
 	
 	// 리스트
 	@RequestMapping(value = "cartList.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String cartlist(HttpSession session, Model model) {
-		
+	public String cartlist(HttpSession session, Model model, HttpServletResponse response) throws Exception {
 		logger.info("CartController cartList "+ new Date());
 		
 		List<CartDto> list = cartService.cartlist();	
@@ -38,7 +39,10 @@ public class CartController {
 		// 아이디 가져오기
 		MemberDto mem = (MemberDto)session.getAttribute("login");
 		if(mem==null) {
-		  return "redirect:/login.do";
+			response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('로그인 정보를 확인해주세요.'); location.href='login.do';</script>");
+            out.flush();
 								
 		}
 		

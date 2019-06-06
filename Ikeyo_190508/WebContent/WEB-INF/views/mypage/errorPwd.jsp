@@ -7,5 +7,5 @@
 
 <script>
 alert("아이디/비밀번호가 틀립니다");
-location.href = "login.do";
+location.href = "myInfoGo.do";
 </script>

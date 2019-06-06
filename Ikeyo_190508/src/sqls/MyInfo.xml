@@ -95,4 +95,68 @@
 		WHERE RNUM BETWEEN ${start} AND ${end}
 		ORDER BY QNA_SEQ ASC
   	</select>
+  	
+  	
+  	<select id="myOrderpage" parameterType="java.lang.String"
+  		resultType="kh.com.a.model.Order_Dto">
+		SELECT * FROM ORDER_ 
+		WHERE ID=#{id} 
+		ORDER BY ORD_SEQ DESC 
+  	</select>
+  	
+  	<select id="mySubOrder" parameterType="java.lang.String"
+  		resultType="kh.com.a.model.Order_Sub_Dto">
+		SELECT ORDER_SUB_SEQ, a.MODEL_ID, COUNT, ORDER_NUM, a.PRICE, P_NAME 
+		FROM 
+		(SELECT ORDER_SUB_SEQ, o.MODEL_ID, o.COUNT, 
+				o.ORDER_NUM, PRICE 
+		FROM ORDER_SUB o, INVENTORY i 
+		WHERE o.model_id = i.model_id) a, PRODUCT p 
+		WHERE a.model_id = p.model_id 
+		AND ORDER_NUM=#{order_num} 
+  	</select>
+  	
+  	<select id="getReviewModal" parameterType="java.lang.Integer" resultType="kh.com.a.model.ReviewDto">
+  		select *
+  		from REVIEW
+  		where rev_seq=#{rev_seq}
+  	</select>
+  	
+  	<select id="paymentlist_" parameterType="java.lang.String" resultType="kh.com.a.model.Order_Dto">
+		SELECT ORD_SEQ, ID, TOTAL_PRICE, ORDER_NUM, DELI_INFO, 
+		       REGDATE, RNAME, ADDRESS1, ADDRESS2, PHONE, CONTENT
+		FROM ORDER_
+		WHERE ORDER_NUM=#{order_num}
+	</select>
+  	
+  	<update id="plusCountInven" parameterType="kh.com.a.model.Order_Sub_Dto">
+  		UPDATE INVENTORY SET COUNT=COUNT+#{count} 
+  		WHERE MODEL_ID=#{model_id} 
+  	</update>
+  	
+  	<delete id="deleteOrderSub" parameterType="java.lang.String">
+  		DELETE FROM ORDER_SUB 
+  		WHERE ORDER_NUM=#{order_num} 
+ 	</delete>
+  	
+  	<delete id="deleteOrder" parameterType="java.lang.String">
+  		DELETE FROM ORDER_ 
+  		WHERE ORDER_NUM=#{order_num} 
+ 	</delete>
+  	<update id="orderFix" parameterType="java.lang.String">
+  		UPDATE ORDER_ SET DELI_INFO=3 
+  		WHERE ORDER_NUM=#{order_num} 
+  	</update>
+  	 <update id="pointGradeUp" parameterType="kh.com.a.model.MemberDto"> 
+        UPDATE MEMBER SET
+        POINT=#{point}, GRADE=#{grade}
+        WHERE ID=#{id}
+     </update>
+     
+     <select id="newSession" parameterType="kh.com.a.model.MemberDto" resultType="kh.com.a.model.MemberDto" >
+        SELECT *
+        FROM MEMBER
+        WHERE ID=#{id}
+     </select>
+  	
   </mapper>

@@ -71,12 +71,18 @@ public class OrderDaoImpl implements OrderDao {
 		sqlSession.delete(ns + "cartdelete", sseq);
 		
 	}
-
+	/*
 	// 결제정보
 	@Override
 	public List<Order_Dto> paymentlist(String id) throws Exception {
 		return sqlSession.selectList(ns + "paymentlist", id);
 	}
+	*/
+	@Override
+	   public List<Order_Dto> paymentlistto(String order_num) throws Exception {
+	      
+	      return sqlSession.selectList(ns + "paymentlistto", order_num);
+	   }
 
 	
 	// 결제완료 : deli_info -> 1 변경
@@ -87,6 +93,12 @@ public class OrderDaoImpl implements OrderDao {
 			
 		return b>0?true:false;
 			
+	}
+	
+	@Override
+	public boolean minusCountInven(Order_Sub_Dto sdto) {
+		int n = sqlSession.update(ns + "minusCountInven", sdto);
+		return n>0?true:false;
 	}
 	
 

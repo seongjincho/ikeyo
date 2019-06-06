@@ -63,9 +63,15 @@ input,textarea{
 <h3>Inventory Register</h3>
 <hr><br><br>
 <form id="inven_frm" method="post">
-<table> 
+<table style="height: 100%; width: 100%;">
+<colgroup>
+	<col style="width: 20%">
+	<col style="width: 80%">
+</colgroup>	
 <tr>
-	<td>모델명:<input type="text" size="50" id="model_id" name="model_id">
+	<td>모델명<hr></td>
+	<td>
+	<input type="text" size="50" id="model_id" name="model_id">
 	<input type="button" value="Inventory check" class="joinButton btn_s_blue btn_100" onclick="inventoryCheck()">
 	<div id="_model_id"></div>
 	<hr>
@@ -73,8 +79,9 @@ input,textarea{
 </tr>
 
 <tr>  <%-- 카테고리 select ? or text필드?  --%>
-	<td>
-		카테고리:<select id="category" name="category"> 
+	<td>카테고리<hr></td>
+		<td>
+		<select id="category" name="category"> 
 		<option value="" selected="selected">선택</option>
 		<option value="책상/테이블" >책상/테이블</option>
 		<option value="침대/매트리스" >침대/매트리스</option>
@@ -90,7 +97,9 @@ input,textarea{
 
 <tr>    <%-- + - 버튼 ??  --%>
 	<!-- <td>수량:<input type="number" id="count" name="count" size="50" min="1" max="1000">개</td> -->
-	<td>수량:&nbsp;&nbsp;<a href="#" class="joinButton btn_s_blue btn_30" onclick="minusCount()"><img alt="" src="./image/btn_pre.gif"></a>&nbsp;&nbsp;
+	<td>수량<hr></td>
+	<td>
+	<a href="#" class="joinButton btn_s_blue btn_30" onclick="minusCount()"><img alt="" src="./image/btn_pre.gif"></a>&nbsp;&nbsp;
 	<input type="text" id="count" name="count" value="1" size="5">개&nbsp;&nbsp;
 	<a href="#" class="joinButton btn_s_blue btn_30" onclick="plusCount()"><img alt="" src="./image/btn_next.gif"></a>
 	<hr>
@@ -98,12 +107,14 @@ input,textarea{
 </tr>
 
 <tr>  
-	<td>가격:<input type="text" id="price" name="price">원
+	<td>가격<hr></td>
+	<td>
+	<input type="text" id="price" name="price">원
 	<hr></td>
 </tr>
 
 <tr>
-	<td align="center"><input type="button" class="joinButton btn_s_blue btn_100" id="btn_regi" value="Register" onclick="goWrite()" disabled="disabled">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<td align="center" colspan="2"><input type="button" class="joinButton btn_s_blue btn_100" id="btn_regi" value="Register" onclick="goWrite()" disabled="disabled">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<input type="button" class="joinButton btn_s_gray btn_100" value="Cancel" onclick="goBack()"></td>
 </tr>
 
@@ -138,17 +149,19 @@ function inventoryCheck() {
 			
 			if(data.trim() == "\"OK\""){
 				
-				$("#_model_id").css("color", "#0000ff")
-				$("#_model_id").html("사용할 수 있는 모델명입니다");
+				/* $("#_model_id").css("color", "#0000ff")
+				$("#_model_id").html("사용할 수 있는 모델명입니다"); */
+				alert("등록할 수 있는 모델명입니다");
 				$("#model_id").val(model_id); 
 				 $("#btn_regi").removeAttr("disabled"); // 활성화 
 					//$("#_btnRegi").attr("disabled", "disabled"); // 비활성화 
 				
 			}else{
 				
-				$("#_model_id").css("color", "#ff0000")
-				$("#_model_id").html("사용 중인 모델명입니다");			
-				$("#model_id").val(""); 
+/* 				$("#_model_id").css("color", "#ff0000")
+				$("#_model_id").html("사용 중인 모델명입니다");	 */
+				alert("이미 등록 되어있는 모델명입니다"); 
+				$("#model_id").focus(); 
 			}
 		},
 		error:function(r, s, err){

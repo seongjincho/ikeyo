@@ -2,6 +2,7 @@ package kh.com.a.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import kh.com.a.dao.WishlistDao;
 import kh.com.a.model.CartDto;
 import kh.com.a.model.MemberDto;
 import kh.com.a.model.ProductDto;
+import kh.com.a.service.ProductService;
 import kh.com.a.service.WishlistService;
 
 @Controller
@@ -30,10 +32,13 @@ public class WishController {
 	
 	 @Autowired
 	 WishlistService wishlistService;
+	 
+	 @Autowired
+	 ProductService productService;
 	
 	 // 리스트
 	@RequestMapping(value = "wishList.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String wishList(HttpSession session, Model model) {
+	public String wishList(HttpSession session, Model model, HttpServletResponse response) throws Exception {
 		
 		logger.info("WishController wishList "+ new Date());
 	
@@ -44,8 +49,10 @@ public class WishController {
 		// 아이디 가져오기
 		MemberDto mem = (MemberDto)session.getAttribute("login");
 		if(mem==null) {
-		return "redirect:/login.do";
-					
+			response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('로그인 정보를 확인해주세요.'); location.href='login.do';</script>");
+            out.flush();
 		}
 			    
 			model.addAttribute("wishlist", list);
@@ -55,32 +62,34 @@ public class WishController {
 	}
 	
 	// 삭제
-	@RequestMapping(value = "wishdel.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String wishDel(int seq)throws Exception {
-		
-		logger.info("WishController wishdel "+ new Date()); 
-		
-		System.out.println(seq);
-		
-		int isS = wishlistService.wishdel(seq);
-		
-		return "redirect:/wishList.do";
-	
-	}
-	
-	@RequestMapping(value = "wishdeltt.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String wishdeltt(int[] seqq, HttpServletRequest req, HttpServletResponse resp, CartDto dto)throws Exception {
-		
-		logger.info("WishController wishdel "+ new Date()); 
-		
-		for(int i = 0; i<seqq.length; i++) {
-			
-			wishlistService.wishdeltt(seqq[i]);
-			
-		}
+	   @RequestMapping(value = "wishdel.do", method = {RequestMethod.GET, RequestMethod.POST})
+	   public String wishDel(int seq, String model_id)throws Exception {
+	      
+	      logger.info("WishController wishdel "+ new Date()); 
+	      
+	      System.out.println(seq);
+	      
+	      productService.deleteCount(model_id);
+	      
+	      int isS = wishlistService.wishdel(seq);
+	      
+	      return "redirect:/wishList.do";
+	   
+	   }
+	   
+	   @RequestMapping(value = "wishdeltt.do", method = {RequestMethod.GET, RequestMethod.POST})
+	   public String wishdeltt(int[] seqq, String[] model_id, HttpServletRequest req, HttpServletResponse resp, CartDto dto)throws Exception {
+	      
+	      logger.info("WishController wishdel "+ new Date()); 
+	      
+	      for(int i = 0; i<seqq.length; i++) {
+	         
+	         wishlistService.wishdeltt(seqq[i]);
+	         productService.deleteCount(model_id[i]);
+	      }
 
-		 return "redirect:/wishList.do";
-	
-	}
+	       return "redirect:/wishList.do";
+	   
+	   }
 	
 }

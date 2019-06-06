@@ -81,14 +81,14 @@
 	for(int i = screenStartPageIndex; i < screenEndPageIndex; i++){
 		if(i == pageNumber){	// 현재 페이지
 			%>
-			<span style="font-size: 9pt; color: #000000; font-weight: bold;">
+			<span style="font-size: 18pt; color: #000000; font-weight: bold;">
 				<%=i+1 %>			
 			</span>&nbsp;			
 			<%
 		}else{		// 그외의 페이지
 			%>
 			<a href="#none" title="<%=i+1 %>페이지" onclick="goPage(<%=i %>)"
-				style="font-size: 7.5pt; color: #000000; font-weight: normal;">
+				style="font-size: 12pt; color: #000000; font-weight: normal;">
 				[<%=i+1 %>]
 			</a>&nbsp;
 			<%

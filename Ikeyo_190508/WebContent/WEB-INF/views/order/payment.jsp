@@ -36,29 +36,62 @@ System.out.println("jsp?" + paymentlist);
 
 <!-- // 결제페이지 -->
 <div class="f_content">
-<div class="f2_content">
+<div class="f2_content" style="background-color: white;">
 
-<!-- // 로그아웃 & 로그인  후 정보(이름)-->
+<%-- <!-- // 로그아웃 & 로그인  후 정보(이름)-->
 <c:if test="${login.id ne ''}">
 	<a href="logout.do" title="로그아웃">[로그아웃]</a>&nbsp;&nbsp;&nbsp;
 </c:if>
 		
 <c:if test="${login.name ne '' }">
 	[${login.name }]님 환영합니다
-</c:if>
+</c:if> --%>
 
-<div align="left">
+<div align="center" style="margin-top: 100px; margin-left: 80px; margin-right: 100px;">
 
 <form id="frmpay" method="post">
 
-	<h2>결제 정보</h2>
+<h2>결제 정보</h2><br>
+<h4>결제 전 확인사항</h4><br>
+<p>1. 고객의 단순한 변심으로 교환, 반품 및 환불을 요구할 때 수반되는 배송비는 고객님께서 부담하셔야합니다.</p>
+<p>2.상품을 개봉했거나 설치한 후에는 상품의 재판매가 불가능하므로 고객님의 변심에 대한 교환, 반품이 불가능함을 양지해 주시기 바랍니다.</p>
+<hr style="border:1px solid #f0f0f0;">
 
-
-<table style="border: 2px solid gray;">
+<br>
+<div style="font-size: 30px; color: black;" align="center">
+<c:forEach var="paymentlist" items="${paymentlist}">
+		<c:if test="${paymentlist.id == login.id }">
+		<c:if test="${paymentlist.deli_info == 0}">
+		
+		<h4>주문번호</h4>
+		<h4 style="color: red; font-size: 40px;">${paymentlist.order_num}</h4><br>
+		
+		<h4>총&nbsp;&nbsp;&nbsp;결제금액</h4>
+		<h4 style="color: red; font-size: 40px;">${paymentlist.total_price}&nbsp;원</h4>
+		
+		<br>
+		<button type="button" class="btn btn-danger" onclick="pay()">결제하기</button>
+		
+		
+		<input type="hidden" id="ord_seq" name="ord_seq" value="${paymentlist.ord_seq}">
+		<input type="hidden" id="total_price" name="total_price" value="${paymentlist.total_price}">
+		<input type="hidden" id="order_num" name="order_num" value="${paymentlist.order_num}">
+		<input type="hidden" id="deli_info" name="deli_info" value="${paymentlist.deli_info}">
+		<input type="hidden" id="rname" name="rname" value="${paymentlist.rname}">
+		<input type="hidden" id="address1" name="address1" value="${paymentlist.address1}">
+		<input type="hidden" id="address2" name="address2" value="${paymentlist.address2}">
+		<input type="hidden" id="phone" name="phone" value="${paymentlist.phone}">
+		<input type="hidden" id="content" name="content" value="${paymentlist.content}">
+ </c:if>
+ </c:if>
+</c:forEach>
+</div>
+<%-- <table style="font-size: 30px; color: black;">
 	
 	<c:forEach var="paymentlist" items="${paymentlist}">
 		<c:if test="${paymentlist.id == login.id }">
 		<c:if test="${paymentlist.deli_info == 0}">
+		
 		<tr>
 			<td>주문번호</td>
 		</tr>
@@ -97,7 +130,7 @@ System.out.println("jsp?" + paymentlist);
 	</c:if>
 	</c:if>
 	</c:forEach>
-</table>
+</table> --%>
 				
 <!-- // -->
 </form>
@@ -144,12 +177,14 @@ function pay() {
 	        msg += '상점 거래ID : ' + rsp.merchant_uid;
 	        msg += '결제 금액 : ' + rsp.paid_amount;
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	    	// alert(msg);
+	    	$("#frmpay").attr("action", "success.do").submit();
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
+	        // alert(msg);
+	        location.href="fail.do";
 	    }
-	    alert(msg);
-	    $("#frmpay").attr("action", "success.do").submit();
 	});
 	
 	// alert("끝"); 

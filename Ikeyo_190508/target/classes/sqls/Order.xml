@@ -45,16 +45,31 @@
 </delete>
 
 <!-- 결제정보 -->
+<!-- 
 <select id="paymentlist" parameterType="java.lang.String" resultType="kh.com.a.model.Order_Dto">
 	SELECT ORD_SEQ, ID, TOTAL_PRICE, ORDER_NUM, DELI_INFO, 
 	       REGDATE, RNAME, ADDRESS1, ADDRESS2, PHONE, CONTENT
 	FROM ORDER_
 	WHERE ID=#{id}       
 </select>
+-->
+<select id="paymentlistto" parameterType="java.lang.String" resultType="kh.com.a.model.Order_Dto">
+   SELECT ORD_SEQ, ID, TOTAL_PRICE, ORDER_NUM, DELI_INFO, 
+          REGDATE, RNAME, ADDRESS1, ADDRESS2, PHONE, CONTENT
+   FROM ORDER_
+   WHERE ORDER_NUM=#{order_num}        
+</select>
+
 
 <update id="dellinfo" parameterType="kh.com.a.model.Order_Dto">
 	UPDATE ORDER_ SET DELI_INFO=1
 	WHERE ORD_SEQ=#{ord_seq}
+</update>
+
+<!-- // 재고-count -->
+<update id="minusCountInven" parameterType="kh.com.a.model.Order_Sub_Dto">
+	UPDATE INVENTORY SET COUNT=COUNT-#{count}
+	WHERE MODEL_ID=#{model_id}
 </update>
 
 

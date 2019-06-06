@@ -18,21 +18,26 @@
 
 <div align="center" style="margin-left:10%; margin-top:10%; margin-bottom:10%;">
 <h3 >논현점</h3>
+<hr>
 </div>	 	
 
 
-<div id="map" style="margin-left:20%; margin-top:10%; margin-bottom:10%; border:2px solid deepskyblue; width:750px;height:500px;"></div>
+<div id="map" style="margin-left:20%; margin-top:10%; margin-bottom:10%; border:2px solid black; width:750px;height:500px;"></div>
 <!-- <div id="map_canvas" style="width:100%;height:800px;"></div> -->
 
-<div align="center" style="margin-left:20%; margin-top:10%; margin-bottom:10%; border:2px solid deepskyblue; width:750px;height:250px;">
+<div align="center" style="margin-left:20%; margin-top:5%; margin-bottom:10%; border:2px solid black; width:750px;height:250px;">
 
 
 <img alt="" src="./image/nh.jpg"  align="left" style="width:350px; height:200px; margin-left: 3%; margin-top: 3%; margin-bottom: 3%">
 
 <pre style="height:220px; margin-left: 3%; margin-top: 10%; margin-bottom: 3%">
 논현점
+
 서울특별시 강남구 학동로 147
+
 02-3443-1001
+
+10 : 00 AM - 10 : 00 PM
 </pre>
 <br>
 

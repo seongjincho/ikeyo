@@ -35,12 +35,12 @@
 <h3 >매장  안내</h3>
 </div>	
 
-<div id="map" style="margin-left:20%; margin-top:10%; margin-bottom:10%; border:2px solid deepskyblue; width:750px;height:500px;"></div>
+<div id="map" style="margin-left:20%; margin-top:10%; margin-bottom:10%; border:2px solid black; width:750px;height:500px;"></div>
 <!-- <div id="map_canvas" style="width:100%;height:800px;"></div> -->
 
-<div align="center" style="margin-left:20%; margin-top:10%; margin-bottom:10%; border:2px solid deepskyblue; width:750px;height:500px;">
+<div align="center" style="margin-left:20%; margin-top:10%; margin-bottom:10%; border:2px solid black; width:750px;height:500px;">
 <pre>
-용산, 중곡 , 논현, 강동 , 송파
+
 </pre>
 <br>
 <pre>

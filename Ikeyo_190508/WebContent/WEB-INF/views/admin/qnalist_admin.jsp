@@ -46,8 +46,6 @@
 
 
 
-
-
 </style>
 
 <title>Insert title here</title>
@@ -95,7 +93,7 @@ $(document).ready(function () {
 <h3>QnA&nbsp;&nbsp;관리&nbsp;&nbsp;페이지</h3>
 <hr><br>
 <form action="" id="qnalist_frm" name="qnalist_frm" method="post">
-<table border="1" width="100%" height="100%" id="list_table" class="tablesorter">
+<table width="100%" height="100%" id="list_table" class="tablesorter">
 
 <colgroup>
 
@@ -136,11 +134,11 @@ $(document).ready(function () {
 		<td>${qna.qna_seq }</td>
 		<td>
 		    <c:if test="${qna.answer eq null }">
-               <font style="color: red; font-size: 18px; font-family: 'Noto Sans KR'; font-weight: 800;">접수</font>
+               <font style= "color:#c80a1e; font-size: 16px; font-family: 'Noto Sans KR'; font-weight: 800;">접수</font>
             </c:if>
             
             <c:if test="${qna.answer ne null }">
-               <font style="color: red; font-size: 18px; font-family: 'Noto Sans KR'; font-weight: 800;">답변완료</font>
+               <font style="color:#c80a1e; font-size: 16px; font-family: 'Noto Sans KR'; font-weight: 800;">답변완료</font>
             </c:if>
 		</td>
 		<td>${qna.id }</td>
@@ -159,6 +157,7 @@ $(document).ready(function () {
 
  <tr>
 	<td colspan="9" style="text-align: center">
+	<br>
 	<select id="s_category" name="s_category">
 	<option value="" selected="selected">선택</option>
 	<option value="id">아이디</option>

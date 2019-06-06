@@ -21,24 +21,30 @@
 	 	// 송파점 서울특별시 송파구 송파대로 167 테라타워B동 3층  37.4851445,127.1200117   -->
 <div align="center" style="margin-left:10%; margin-top:10%; margin-bottom:10%;">
 <h3 >용산점</h3>
+<hr>
 </div>	 	
 
-<div id="map" style="margin-left:20%; margin-top:10%; margin-bottom:10%; border:2px solid deepskyblue; width:750px;height:500px;"></div>
-<!-- <div id="map_canvas" style="width:100%;height:800px;"></div> -->
+<div id="map" style="margin-left:20%; margin-top:10%; margin-bottom:10%; border:2px solid black;  width:750px;height:500px;"></div>
 
-<div align="center" style="margin-left:20%; margin-top:10%; margin-bottom:10%; border:2px solid deepskyblue; width:750px;height:250px;">
+
+ <div align="center" style="margin-left:20%; margin-top:5%; margin-bottom:10%; border:2px solid black; width:750px;height:250px;">
 
 
 <img alt="" src="./image/ys.jpg"  align="left" style="width:350px; height:200px; margin-left: 3%; margin-top: 3%; margin-bottom: 3%">
 
-<pre style="height:220px; margin-left: 3%; margin-top: 10%; margin-bottom: 3%">
+<pre style="height:220px; margin-left: 3%; margin-top: 8%; margin-bottom: 3%; vertical-align: middle;">
 용산점
+
 서울특별시 용산구 한강대로 23길 55
+
 02-2012-3343
+
+10 : 00 AM - 10 : 00 PM
 </pre>
 <br>
 
-</div>
+</div> 
+ 
 
 
 

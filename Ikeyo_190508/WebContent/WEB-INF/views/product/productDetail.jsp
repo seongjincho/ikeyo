@@ -13,96 +13,134 @@
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
 <style>
+.quantity {
+	display: inline-block;
+	position: relative;
+	width: 50px;
+	vertical-align: top;
+}
 
-.quantity{display:inline-block;position:relative;width:50px;vertical-align:top;}
-.quantity input{width:30px;height:25px;padding:0 2px 0 3px;line-height:25px;border:1px solid #d4d8d9;border-radius:3px 0 0 3px;}
-.quantity .up{position:absolute;left:28px;top:0;}
-.quantity .down{position:absolute;left:28px;top:12px;}
+.quantity input {
+	width: 30px;
+	height: 25px;
+	padding: 0 2px 0 3px;
+	line-height: 25px;
+	border: 1px solid #d4d8d9;
+	border-radius: 3px 0 0 3px;
+}
 
+.quantity .up {
+	position: absolute;
+	left: 28px;
+	top: 0;
+}
 
-#main_container{
+.quantity .down {
+	position: absolute;
+	left: 28px;
+	top: 12px;
+}
+
+#main_container {
 	margin-bottom: 0;
 	padding-bottom: 0;
 }
-#main{
+
+#main {
 	margin-bottom: 0;
 	padding-bottom: 0;
 }
 
-#tabContainer hr{
-    position: relative;
-    padding: 0 20px;
-    font-size: 0;
-    box-sizing: border-box;
-    margin: 0;
+#tabContainer hr {
+	position: relative;
+	padding: 0 20px;
+	font-size: 0;
+	box-sizing: border-box;
+	margin: 0;
 	padding: 0;
 }
 
-#tabContainer ul{
+#tabContainer ul {
 	list-style: none;
-    padding: 0;
-    margin: 0;
+	padding: 0 0 10;
+	margin: 0;
+	z-index: 3;
 }
 
-#tabContainer ul li { 
-	display:inline; 				/* 세로나열을 가로나열로 변경 */
-	border:1px solid #999; 			/* 각 메뉴의 왼쪽에 "|" 표시(분류 표시) */ 
-	font:bold 12px Dotum; 			/* 폰트 설정 - 12px의 돋움체 굵은 글씨로 표시 */ 
-	padding:10 10 0 10px;			 /* 각 메뉴 간격 */ 
-	margin: 10 10 0 10;
+#tabContainer ul li {
+	display: inline; /* 세로나열을 가로나열로 변경 */
+	border: 1px solid #999; /* 각 메뉴의 왼쪽에 "|" 표시(분류 표시) */
+	font: bold 12px Dotum; /* 폰트 설정 - 12px의 돋움체 굵은 글씨로 표시 */
+	padding: 10 20 10 20px; /* 각 메뉴 간격 */
+	/* margin: 10 10 0 10; */
 	border-bottom: none;
-} 
+}
 
-#tabContainer ul li:first-child{
-	/* border-left:none; */	/* 메뉴 분류중 제일 왼쪽의 "|"는 삭제 */
-}  
+.tabContainer1 {
+	position: relative;
+	padding: 0 20px;
+	font-size: 0;
+	box-sizing: border-box;
+	width: 100%;
+	border-bottom: 1px solid #000 !important;
+}
+
+#tabContainer ul li:first-child {
+	/* border-left:none; */ /* 메뉴 분류중 제일 왼쪽의 "|"는 삭제 */
+	
+}
 
 #tabContainer .tabFillSpace {
 	position: absolute;
-	
-	left:0;
-	bottom:0;
-	
-	width:100%;
-	height:0;
-	padding:0;
-	
-	border-color:#000;
-	
-	z-index:3;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 0;
+	padding: 0;
+	border-color: #000;
+	z-index: 3;
 }
 
-.cloneTabsContainer .tabItem.active,
-.cloneTabsContainer .tabItem {
+.cloneTabsContainer .tabItem.active, .cloneTabsContainer .tabItem {
 	position: relative;
-	
-	margin:0;
-	margin-left:-1px;
-	
-	padding:0 10px;
-/* 	width:168px; */
-	height:50px;
-	line-height:50px;
-	
+	margin: 0;
+	margin-left: -1px;
+	padding: 0 10px;
+	/* width: 168px; */
+	height: 50px;
+	line-height: 50px;
 	font-size: 12px;
-	color:#999;
-	
-	border-color:#D1D1D1;
-	
+	color: #999;
+	border-color: #D1D1D1;
 	box-sizing: border-box;
-	
 	border-radius: 0;
-	background:#fff;
+	background: #fff;
+	transition: background-color .2s, border-bottom-color .2s;
+	text-overflow: ellipsis;
 }
 
 .cloneTabsContainer .tabItem:first-child {
-	margin-left:0;
+	margin-left: 0;
 }
 
 .cloneTabsContainer .tabItem.active {
-	border-color:#000;
-	color:#000;
-	z-index:5;
+	border-color: #000;
+	color: #000;
+	z-index: 5;
+	overflow: unset;
+	white-space: unset;
+	border-bottom: none;
+}
+#leftNavBottom{
+	border-bottom: 1px solid #000 !important;
+}
+
+.productInfoContainer {
+	padding-bottom: 1.04em;
+	overflow: hidden;
+	box-sizing: border-box;
+	padding: 20px 15px;
+	width: 1060px;
 }
 
 /*위시리스트*/
@@ -123,21 +161,82 @@
 }
 
 /*버튼*/
-.btn_s_gray {/*장바구니*/
-    border: none;
-    background-color: #a9a9a9;
-    color: #FFF;
+.btn_s_gray { /*장바구니*/
+	border: none;
+	background-color: #a9a9a9;
+	color: #FFF;
+}
+
+.btn_s_gray:hover {
+	background-color: #6c757d;
 }
 
 .btn_205 {
-    width: 205px;
-    height: 50px;
-    font-size: 16px;
+	width: 230px;
+	height: 50px;
+	font-size: 16px;
 }
+
 .btn_s_red {
-    border: none;
-    background-color: #007bff;
-    color: #FFF;
+	border: none;
+	background-color: #007bff;
+	color: #FFF;
+}
+
+.btn_s_red:hover {
+	background-color: #0051ba
+}
+
+.grayBtn {
+	display: inline-block;
+	margin-top: 6px;
+	width: 108px;
+	height: 33px;
+	border: 1px solid #63666a;
+	color: #333;
+	background-color: #fff;
+}
+
+.grayBtn:hover {
+	color: #fff;
+	background-color: #63666a;
+	cursor: pointer;
+}
+
+/* The Modal (background) */
+.modal3 {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 9; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content3 {
+	background-color: #fefefe;
+	margin: 100px auto 0px; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 450px; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close3 {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+.close3:hover, .close3:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 </style>
@@ -159,34 +258,33 @@
 	<col width="50%"/><col width="50%"/>
 </colgroup>
 <tr>
-	<td>
-	
-		<div id="left_container">		
+	<td valign="top">	
+		<div id="left_container" style="margin-right: 20px;">	
 		<table>
 		<colgroup>
 			<col width="30%"/><col width="30%"/><col width="30%"/>
 		</colgroup>
 		<tr>
 			<td colspan="3">
-				<div style="margin: 20 20 20 20;" id="mainImgConatiner">
-					<img src="/img/${pdto.photo_af1 }" id="img_main" style="width: 450; height: 450; border: 1px solid;" />
+				<div style="margin: 10 10 10 10;" id="mainImgConatiner">
+					<img src="/img/${pdto.photo_af1 }" id="img_main" style="width: 500; height: 500;" />
 				</div>
 			</td>
 		</tr>
 		<tr>
 			<td width="33%">
-				<div style="margin: 20 20 20 20;" id="imageThumb_0">
-				<img src="/img/${pdto.photo_af1 }" alt="" id="${pdto.photo_af1 }" style="width: 123px; height: 123px; border: 1px solid;"  />
+				<div style="margin: 10 10 10 10;" id="imageThumb_0">
+				<img src="/img/${pdto.photo_af1 }" alt="" id="${pdto.photo_af1 }" style="width: 150px; height: 150px;"  />
 				</div>
 			</td>
 			<td width="33%">
-				<div style="margin: 20 20 20 20;" id="imageThumb_1">
-				<img src="/img/${pdto.photo_af2 }" alt="" id="${pdto.photo_af2 }" style="width: 123px; height: 123px; border: 1px solid;"  />
+				<div style="margin: 10 10 10 10;" id="imageThumb_1">
+				<img src="/img/${pdto.photo_af2 }" alt="" id="${pdto.photo_af2 }" style="width: 150px; height: 150px;"  />
 				</div>
 			</td>
 			<td width="33%">
-				<div style="margin: 20 20 20 20;" id="imageThumb_2">
-				<img src="/img/${pdto.photo_af3 }" alt="" id="${pdto.photo_af3 }" style="width: 123px; height: 123px; border: 1px solid;"  />
+				<div style="margin: 10 10 10 10;" id="imageThumb_2">
+				<img src="/img/${pdto.photo_af3 }" alt="" id="${pdto.photo_af3 }" style="width: 150px; height: 150px;"  />
 				</div>
 			</td>
 		</tr>
@@ -196,7 +294,7 @@
 	</td>
 	
 	<!-- 오른쪽 content -->
-	<td style="padding: 20 0 40% 10px;" align="center" valign="middle">
+	<td style="padding: 20 0 10% 10px;" align="center" valign="top">
 	
 		<div id="right_container" style="width: 100%; height: auto;">
 		<!-- 바로구매 폼 -->
@@ -211,7 +309,7 @@
 		
 		<tr align="center">
 			<td colspan="2" align="left">
-			<br/><br/>
+			<br/>
 				<h4>${idto.category }</h4><!-- 카테고리 --> 
 			</td>
 		</tr>
@@ -296,6 +394,7 @@
 				<span style="text-align: right;"><b>총 상품금액</b> : 
 					<span id="test"></span>
 					<input type="text" id="totalprice" value="" readonly="readonly" style="text-align: right; border: none; padding-right: 5px;"/> 
+					원
 				</span>
 				<hr/>
 				<br/><br/>
@@ -310,6 +409,14 @@
 				<input type="button" value="바로구매" class="btn_s_red btn_205" onclick="nowCart()" />
 			</td>
 		</tr>
+		<c:if test="${login.auth eq 1 }">
+		<tr>
+			<td colspan="2" align="center">
+				<br/>			
+				<input type="button" value="수정하기" class="grayBtn btn_205" onclick="p_update(${pdto.prod_seq})" />				
+			</td>
+		</tr>
+		</c:if>
 		
 		</table>
 		</form>
@@ -319,21 +426,23 @@
 </tr>
 
 </table>
+<br/><br/><br/>
 </div>
 
 <!-- 제품정보 컨테이너 -->
-<div id="tabContainer" style="box-sizing: border-box;" align="left">
+<div id="tabContainer" class="tabContainer1" align="left">
 	<ul class="cloneTabsContainer">
 		<li class="tabItem active" id="productinfo">제품 정보</li>
 		<li class="tabItem" id="reviews" >상품평</li>
 		<li class="tabItem" id="qnas" >상품Q&amp;A</li>	
 	</ul>
-<hr/>
 	<div class="tabFillSpace">&nbsp;</div>
 </div> <!-- id= tabContainer -->
 
-<!-- 제품정보, 상품평, 상품 Q&A -->
-<div id="infoContainer" align="left">	
+<!-- 제품정보, 상품평, 상품 Q&A-->
+<div id="leftNavBottom" style="display: block;">
+
+<div id="infoContainer" class="productInfoContainer" align="left">	
 	<jsp:include page="/WEB-INF/views/product/productInfo.jsp" flush="false"/> 
 </div>
 
@@ -344,6 +453,32 @@
 <div id="qnasContainer" align="left" style="display: none;">
 	<jsp:include page="/WEB-INF/views/qna/p_qnaList.jsp" flush="false"/>
 </div>
+</div>
+
+<!--  상품 수정페이지  -->
+<!-- The Modal -->
+<div id="myModal3" class="modal3">
+ 
+	<!-- Modal content -->
+    <div class="modal-content3">
+    	<span class="close3" style="text-align: right;">&times;</span>                                                               
+        <jsp:include page="/WEB-INF/views/product/productUpdate.jsp" flush="false"/> 
+    </div>
+</div>
+
+<script>
+function p_update(prod_seq) {
+	//alert(prod_seq);
+	$(".modal3").css("display", "block");
+}
+
+$(".close3").click(function() {
+	$(".modal3").css("display", "none");
+	$("#title3").val("");
+	$("#content3").val("");
+});
+</script>
+
 </div>	<!-- id="main_container" -->
 
 </div><!-- id="main" -->
@@ -385,9 +520,11 @@ function minusCount(){
 function plusCount(){
 	var count = $("#count").val();	
 	var maxcount = ${idto.count};
+	if(10 <= maxcount){
+		maxcount = 10;
+	}
 	
-	if(count<maxcount && count>=0){
-		
+	if(count<maxcount && count>=0){		
 		count ++;
 		$("#count").val(count);
 		$("#totalprice").val(((${idto.price } * count) +"").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ");
@@ -398,24 +535,36 @@ function plusCount(){
 			$("#count").val(1);
 			$("#count").focus();
 		}else {
-			alert("재고 수량이상 주문할 수 없습니다.");
+			alert("재고 수량(최대10개)이상 주문할 수 없습니다.");
 		}		
 	}
 }
 
 $("#productinfo").click(function() {
+	$("#productinfo").attr("class", "tabItem active");
+	$("#reviews").attr("class", "tabItem");
+	$("#qnas").attr("class", "tabItem");
+	
 	$("#infoContainer").css("display", "block");
 	$("#reviewsContainer").css("display", "none");
 	$("#qnasContainer").css("display", "none");
 });
 
 $("#reviews").click(function() {
+	$("#reviews").attr("class", "tabItem active");
+	$("#productinfo").attr("class", "tabItem");
+	$("#qnas").attr("class", "tabItem");
+	
 	$("#infoContainer").css("display", "none");
 	$("#reviewsContainer").css("display", "block");
 	$("#qnasContainer").css("display", "none");
 });
 
 $("#qnas").click(function() {
+	$("#qnas").attr("class", "tabItem active");
+	$("#reviews").attr("class", "tabItem");
+	$("#productinfo").attr("class", "tabItem");
+	
 	$("#infoContainer").css("display", "none");
 	$("#reviewsContainer").css("display", "none");
 	$("#qnasContainer").css("display", "block");
@@ -437,10 +586,8 @@ function goCart() {
 		dataType: "json",
 		data: {"model_id" : model_id, "id" : id, "count" : count},
 		success:function(data){
-			alert("카트에 담겼습니다.");
-			if(confirm("장바구니로 가시겠습니까?")){
+			if(confirm("상품이 장바구니에 담겼습니다.\n바로 확인하시겠습니까?")){
 				location.href="cartList.do";				
-			}else{				
 			}
 		},
 		error:function(xhr, textStatus, err){
@@ -460,9 +607,7 @@ function nowCart() {
 		alert("로그인 후 이용 가능합니다.");
 		return false;
 	}
-	$("#_frm_cart").attr("action", "productOrder.do").submit();
-	
-	
+	$("#_frm_cart").attr("action", "productOrder.do").submit();	
 }
 
 </script>

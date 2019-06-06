@@ -22,60 +22,74 @@
 <!-- content.css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/content.css">
 
+<!-- cart.css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/orderlist.css">
+
 <style type="text/css">
 /* // 하단 버튼  */
 .listResult { padding:20px; background:#eee; }
 .listResult .sum { float:left; width:45%; font-size:22px; }
 
-.listResult .orderOpne { float:right; width:45%; text-align:right; }
+.listResult .orderOpne { float:right; width:45%; text-align:right; margin-right:100px; }
 .listResult .orderOpne button { font-size:18px; padding:5px 10px; border:1px solid #999; background:#fff;}
 .listResult::after { content:""; display:block; clear:both; }
 
 /* // 주문정보  */
 /* // display: none; -> 입력버튼 누르면 내용 보이게 */
-.orderInfo { border:5px solid #eee; padding:20px; display: none;}
+.orderInfo { border:5px solid #eee; padding:20px; display: none; }
 .orderInfo .inputArea { margin:10px 0; }
-.orderInfo .inputArea label { display:inline-block; width:120px; margin-right:10px; }
+.orderInfo .inputArea label { display:inline-block; width:120px; margin-right:10px; color: black;}
 .orderInfo .inputArea input { font-size:14px; padding:5px; }
-#userAddr2, #userAddr3 { width:250px; }
 .orderInfo .inputArea:last-child { margin-top:30px; }
 .orderInfo .inputArea button { font-size:20px; border:2px solid #ccc; padding:5px 10px; background:#fff; margin-right:20px;}
+</style>
+
+<style type="text/css">
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
 </style>
 
 </head>
 <body>
 
-<div class="f_content">
-<div class="f2_content">
+<div class="f_content" style="margin-bottom: 70%;">
+<div class="f2_content" style="background-color: white;">
 
-<div align="center">
+<div align="center" style="margin-top: 100px; margin-left: 80px; margin-right: 100px;">
 
-<form role="form" method="post" autocomplete="off" action="order.do">
-<!-- // 로그아웃 & 로그인  후 정보(이름)-->
+<form role="form" method="post" autocomplete="off" action="order.do"
+	style="float: left; clear: both; margin-left: 200px; margin-bottom: 30px; width: 800px;">
+
+<%-- <!-- // 로그아웃 & 로그인  후 정보(이름)-->
 <c:if test="${login.id ne ''}">
 	<a href="logout.do" title="로그아웃">[로그아웃]</a>&nbsp;&nbsp;&nbsp;
 </c:if>
 		
 <c:if test="${login.name ne '' }">
 	[${login.name }]님 환영합니다
-</c:if>
+</c:if> --%>
 
-<h2>주문서 작성</h2>
+<h2>주문서 작성</h2><br>
 <h4>배송/결제 정보를 정확히 입력해주세요.</h4>
-<h4 style="color:red;">* 이미지를 클릭하면 해당 상품으로 이동합니다.</h4>
+<hr style="margin:63px 0px; border:1px solid #f0f0f0;">
 
-<h4>주문상품정보</h4>
 
-<table style="border: 1px solid gray;">
+<h3>주문상품정보</h3>
+<h5 style="color:red;">*&nbsp;이미지를 클릭하면 해당 상품으로 이동합니다.</h5><br>
+
+<table style="border: 1px solid gray;" class="orderProduct_info">
 
 <thead>
 
 	<tr>
-		<th colspan="2">상품정보</th>
-		<th class="w130">단가</th>
-		<th class="w130">수량</th>
-		<th class="w130">상품금액</th>
-		<th class="w100">배송형태</th>
+		<th colspan="2" style="font-size: 16px;">상품정보</th>
+		<th class="w130" style="font-size: 16px;">단가</th>
+		<th class="w130" style="font-size: 16px;">수량</th>
+		<th class="w130" style="font-size: 16px;"style="font-size: 16px;">상품금액</th>
+		<th class="w100" style="font-size: 16px;">배송형태</th>
 	</tr>
 	
 </thead>
@@ -107,23 +121,23 @@
 		
 		<c:forEach var="orderplist" items="${orderplist }">
 		<c:if test="${orderplist.model_id == orderlist.model_id }">
-		<td> <!-- // 단가 금액 -->
+		<td style="color: black; font-weight:normal; font-size: 16px;" align="center"> <!-- // 단가 금액 -->
 			 ${orderplist.price }&nbsp;원
 			 <!-- // 상품금액 구하기 위한 식 -->
 			 <c:set var="sum" value="${orderplist.price }"/>
 		</td>
 		
-		<td> <!-- // 주문수량 -->
+		<td style="color: black; font-weight:normal; font-size: 16px;" align="center"> <!-- // 주문수량 -->
 			 &nbsp;&nbsp;${orderlist.count }
 			 <c:set var="sum" value="${ sum * orderlist.count }원"/>
 		</td>
 		
-		<td> <!-- // 상품 금액 -->
+		<td style="color: black; font-weight:normal; font-size: 16px;" align="center"> <!-- // 상품 금액 -->
 			 <c:out value="${sum }"/>
 			 <c:set var="totalsum" value="${totalsum + (orderlist.count * orderplist.price)}" />
 		</td>
 		
-		<td> <!-- // 배송 형태 -->
+		<td style="color: black; font-weight:normal; font-size: 16px;" align="center"> <!-- // 배송 형태 -->
 			<p style="color: gray;">시공</p>
 		</td>
 		</c:if>
@@ -139,7 +153,7 @@
 
 </table>
 		<div class="listResult">
- 		<div class="sum">
+ 		<div class="sum" style="color: red;">
   		 총 상품 금액 : <fmt:formatNumber pattern="###,###,###" value="${totalsum}"/>&nbsp;원
 		<input type="hidden" name="total_price" value="${totalsum}">
 		</div>
@@ -160,59 +174,51 @@
 
 <!-- // 배송지 정보  -->
 <div class="orderInfo">
+  <br>  
+  <h3>배송지 정보</h3><br>
     
-  <h2>배송정보</h2>
-    
-  <div class="inputArea">
-   <label for="">수령인</label>
-   <input type="text" name="rname" value="${login.name}" required="required" style="color: gray;"/>
-  </div>
-  
-  <div class="inputArea">
-   <label for="orderPhon">수령인 연락처</label>
-   <input type="text" name="phone" value="${login.phone}" required="required" style="color: gray;"/>
-  </div>
-  
-  <div class="inputArea">
-   <label for="userAddr1">배송지 정보</label>
-   <p style="color: gray;">* 제주도, 울릉도 지역은 온라인 주문이 불가하오니, 대리점에 직접 방문해주세요</p>
-    <!-- // 주소 -->
-    <div class="form-group">                   
-	<input class="form-control" style="width: 5%; display: inline; color: gray;" placeholder="우편번호" name="address1" type="text" required="required"/>
-    <button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
-	</div>
-	<div class="form-group">
-    <input class="form-control" style="width: 30%; top: 5px; color: gray;" placeholder="도로명 주소" name="address2" type="text" required="required" />
-	</div>
-	<div class="form-group">
-    <input class="form-control" placeholder="상세주소" type="text" name="address3" style="width: 30%; color: gray;"  />
-	</div>
-	
-	<p>내 등록된 주소</p>
-	<h5 style="color: gray;">${login.address1 }&nbsp;${login.address2 }</h5>
-  </div>
-  
-  <div class="inputArea">
-  	<label for="" style="width: 10%;">배송 시 요청사항</label>
-  	<input type="text" name="content" placeholder="200자 이내로 작성해 주세요" style="color: gray; width: 20%"/>
-  </div>
-
    <div class="inputArea">
-  	<hr style="color: gray;">
-  	<label for=""><b>결제 정보</b></label><br>
-  	<p style="color: red;">총 결제 금액 : <fmt:formatNumber pattern="###,###,###" value="${totalsum}"/>&nbsp;원</p>	
-  	<hr style="color: gray;">
-  	
-  	<label for=""><b>결제 전확인사항</b></label><br>
-  	<hr style="color: gray;">
-  	<p>1. 고객의 단순한 변심으로 교환, 반품 및 환불을 요구할 때 수반되는 배송비는 고객님께서 부담하셔야합니다.</p>
-	<p>2.상품을 개봉했거나 설치한 후에는 상품의 재판매가 불가능하므로 고객님의 변심에 대한 교환, 반품이 불가능함을 양지해 주시기 바랍니다.</p>
-  	<hr style="color: gray;">
-  	
+   
+   <label>수령인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+   <input type="text" name="rname" value="${login.name}" style="color: gray;" required/>
+   <br>	   	
+ 
+   <label>수령인 연락처</label>
+   <input type="text" name="phone" value="${login.phone}" style="color: gray;" required/>
+  
+   <br><br><br>
+   <label>주소</label>
+   <p class="f13" style="margin:10px 0px 14px 10px;">
+      * 제주도, 울릉도 지역은 온라인 주문이 불가하오니, 대리점에 직접 방문해주세요</p>
+   
+    <!-- // 주소 --> 
+    <br>             
+	<input class="w305" id="zipcode_disabled" disabled="disabled" name="address1" type="text"/>
+    <input type="button" style="border: none; background-color: #63666A; color: #FFF;" class="btn_s_gray btn_100_41" onclick="execPostCode();" value="주소검색">
+    <br>                             
+	
+    <input class="w420" style="margin:9px 0px;" name="address2" type="text" size="53.8px;" id="_addr1" required/>
+	<br> 
+    <input class="w420" type="text" name="address3" size="53.9px;" id="_addr2"/>
+
+	<br><br> <!-- // 내 배송지  불러오기 -->
+	<input type="hidden" id="_id" value="${login.id }">
+	<input type="hidden" id="addr1" value="${login.address1 }">
+	<input type="hidden" id="addr2" value="${login.address2 }">
+
+	<input type="button" class="btn btn-outline-danger" 
+	     style="margin: 20px 9px 30px 0px; border: solid 1px #c80a1e; background-color: white; color: #c80a1e;"
+	     value="내 배송지 불러오기" id="_btnaddr">  
+ 
+  <div class="inputArea">
+  	<label for="">배송 시 요청사항</label>
+  	<!-- // maxlength- 필드의 최대 문자 갯수 -->
+  	<input type="text" name="content" placeholder="200자 이내로 작성해 주세요" style="color: gray; width: 20%" maxlength="200"/>
+  </div><br>
+
   </div>
 	
    <!-- // 결제수단 -->
-  	
   <div class="inputArea">
    <button type="submit" class="order_btn">주문</button>
    <button type="button" class="cancel_btn">취소</button> 
@@ -224,6 +230,11 @@
     });       
    </script>
    
+   <!-- // null값 -->
+   <script type="text/javascript">
+   
+   </script>
+   
   </div>
  
 	<c:forEach var="orderlist" items="${orderlist }">
@@ -231,7 +242,6 @@
 	</c:forEach>
 
 </div>
-
 <!-- // 끝 -->
 </form>
 </div>
@@ -239,10 +249,7 @@
 </div>
 </div>
 
-
-<!-- // 결제 API -->
-
-
+<br><br><br><br><br><br><br>
 
 <script type="text/javascript">
 function execPostCode() {
@@ -286,6 +293,47 @@ function execPostCode() {
        }
     }).open();
 }
+</script>
+
+<!-- // 주소 가져오기  -->
+<script type="text/javascript">
+/* $("#_btnaddr").click(function () {	
+	alert("테스트");
+
+	$.ajax({
+		type:"post",
+		url:"getaddr.do",
+		data:{ id:$("#_id").val() },
+		async:true,
+		success:function(msg){
+			
+			if(msg == 'NO'){
+				$("#_addr1").val( $("#_addr1").val() );
+				$("#_addr2").val( $("#_addr2").val() );
+			
+			
+			}else {	
+				$("#_addr1").val("");
+				$("#_addr2").val("");
+			}
+			
+		},
+		error:function(){
+			alert("error");	
+		}
+		
+	});
+	
+});  */
+
+$("#_btnaddr").click(function () {
+
+	
+	$("#_addr1").val( $("#addr1").val() );
+	$("#_addr2").val( $("#addr2").val() );
+	
+	
+});
 </script>
 
 

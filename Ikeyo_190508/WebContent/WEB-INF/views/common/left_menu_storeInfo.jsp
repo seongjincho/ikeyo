@@ -39,7 +39,14 @@
 <body id="page-top">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-     <c:if test="${login.id != null }">${login.id }님 환영합니다.</c:if> 
+     <div style="color: white;">
+		<c:if test="${login.id ne '' && login.id != null  }">
+			[${login.name }]님 환영합니다
+		<br>
+		<fmt:formatDate var="now" value="${nows }" pattern="yyyy/MM/dd"/>
+		${now }
+		</c:if>
+	</div> 
  	<a class="navbar-brand js-scroll-trigger" href="main.do">
       <span class="d-block d-lg-none">IKEYO</span>
       <span class="d-none d-lg-block">

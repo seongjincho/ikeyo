@@ -88,7 +88,7 @@ public class ReviewController {
 	// 상품평 수정 
 	@RequestMapping(value="reviewUpdate.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String reviewUpdate(ReviewDto rdto,
-			@RequestParam(value="fileload", required = false)MultipartFile fileload, Model model ) {
+			@RequestParam(value="r_fileload", required = false)MultipartFile fileload, Model model ) {
 		System.out.println(rdto.toString());
 
 		// 파일이름 취득

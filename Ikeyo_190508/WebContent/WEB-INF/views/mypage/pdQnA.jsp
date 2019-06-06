@@ -14,7 +14,7 @@
 		<div class="title">
 			상품 Q&A
 		</div>
-		<br><br><br>
+		<br><br>
 		<div class="bodyy">
 			<div>
 				<table class="listTbl">
@@ -74,17 +74,16 @@
 									</td>
 								</tr>
 								<tr class="contents ${vs.index } cBottom">
-									<td class="tct f20" style="color: rgb(170, 170, 170); display: none;">A</td>
-									<td colspan="4" style="display: none;">
-										
-									<c:if test="${i.answer ne null }">
-										<div class="cnts f14">
-												${i.answer }
-										</div>
-										<br>
-										<span class="date"><fmt:formatDate value="${i.adate }" pattern="yyyy.MM.dd" /></span>
+										<c:if test="${i.answer ne null }">
+										<td class="tct f20" style="color: rgb(170, 170, 170); display: none;">A</td>
+										<td colspan="4" style="display: none;">
+											<div class="cnts f14">
+													${i.answer }
+											</div>
+											<br>
+											<span class="date"><fmt:formatDate value="${i.adate }" pattern="yyyy.MM.dd" /></span>					
+										</td>
 									</c:if>
-									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -96,12 +95,14 @@
 					<p style="color: ; font-size: 18px;" class="noto">조회 결과가 없습니다.</p>
 				</div>
 			</c:if>
+			<c:if test="${not empty qna }">
 			<jsp:include page="/WEB-INF/views/product/paging.jsp" flush="false">
 				<jsp:param value="${pageNumber }" name="pageNumber"/>
 				<jsp:param value="${pageCountPerScreen }" name="pageCountPerScreen"/>	
 				<jsp:param value="${recordCountPerPage }" name="recordCountPerPage"/>
 				<jsp:param value="${totalRecordCount }" name="totalRecordCount"/>
 			</jsp:include>
+			</c:if>
 		</div>
 	</div>
 </div>

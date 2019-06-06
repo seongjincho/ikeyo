@@ -7,7 +7,7 @@
  
  @media (min-width:992px){
  
- body{padding-top:0;padding-left:17rem} /* // left_menu ³ÏÀÌ Á¶Àý! */ 
+ body{padding-top:0;padding-left:17rem} /* // left_menu ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½! */ 
  
  }h1,h2,h3,h4,h5,h6{
  font-family:'Saira Extra Condensed',-apple-system,BlinkMacSystemFont,
@@ -39,16 +39,39 @@
  
  .dev-icons .list-inline-item i:hover{color:#0051ba}
  
+ #sideNav .navbar-nav #nav-li .nav-span{
+ font-weight: 800;
+ }
+ 
+ #sideNav .navbar-nav #nav-li:nth-child(1),
+ #sideNav .navbar-nav #nav-li:nth-child(6),
+ #sideNav .navbar-nav #nav-li:nth-child(9),
+ #sideNav .navbar-nav #nav-li:nth-child(10),
+ #sideNav .navbar-nav #nav-li:nth-child(13){
+ padding-bottom: 10px;
+ }
+ 
+ #sideNav .navbar-nav #nav-li #nav-a{
+ padding: .1rem 1rem;
+ font-size: 14px
+ } 
+ 
  #sideNav .navbar-nav .nav-item .nav-link{font-weight:800;
  letter-spacing:.05rem;
- text-transform:uppercase}
+ text-transform:uppercase;
+ }
+ 
+ #sideNav .navbar-nav .nav-item .nav-link:hover{
+ cursor: pointer;
+ color: #c80a1e;
+ }
  
  #sideNav .navbar-toggler:focus{outline-color:#d48a6e}
  
  @media (min-width:992px){#sideNav{text-align:center;position:fixed;
  top:0;left:0;display:-webkit-box;display:-ms-flexbox;display:flex;
  -webkit-box-orient:vertical;-webkit-box-direction:normal;
- -ms-flex-direction:column;flex-direction:column;width:17rem;  /* left_menu ³ÏÀÌ Á¶Àý */
+ -ms-flex-direction:column;flex-direction:column;width:17rem;  /* left_menu ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
  height:100vh}
  
  #sideNav .navbar-brand{display:-webkit-box;
@@ -87,7 +110,7 @@
  
 a:active,a:focus,a:hover{color:#824027}
  
- .navbar-dark .navbar-nav .nav-link {  /*  // left_menu ±Û¾¾ »ö  */
+ .navbar-dark .navbar-nav .nav-link {  /*  // left_menu ï¿½Û¾ï¿½ ï¿½ï¿½  */
     color: rgba(255,255,255,.9);
 }
  

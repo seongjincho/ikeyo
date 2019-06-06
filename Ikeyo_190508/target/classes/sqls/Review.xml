@@ -9,7 +9,7 @@
 	<select id="reviewList" parameterType="java.lang.String" resultType="kh.com.a.model.ReviewDto">
 		SELECT * 
 		FROM REVIEW
-		WHERE MODEL_ID=#{model_id}
+		WHERE MODEL_ID=#{model_id} AND DEL=0 
 	</select>
 	
 	<!-- 상품평 글쓰기 -->
@@ -34,7 +34,13 @@
 		FROM REVIEW
 		WHERE REV_SEQ=#{rev_seq}
 	</select>
-
+	
+	<!-- 마이페이지 상품평 관리 update -->
+	<update id="reviewDeleteMy" parameterType="kh.com.a.model.ReviewDto">
+		update REVIEW set
+		del=1
+		where rev_seq=#{rev_seq}
+	</update>
 </mapper>
 
   

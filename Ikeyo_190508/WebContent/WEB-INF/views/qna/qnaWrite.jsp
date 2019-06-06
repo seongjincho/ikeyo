@@ -11,6 +11,7 @@
 	font-size:13px;	/* 10pt */
 	margin-bottom: 5px; 
 }
+
 </style>
 
 </head>
@@ -31,7 +32,7 @@
 <br/>
 <span class="noto f13">내용을 입력해 주세요</span>
 <br/>
-<textarea rows="10" cols="50" name="content" id="content2" style="max-width: 288px;"
+<textarea rows="10" cols="50" name="content" id="content2" style="max-width: 288px; resize: none;"
 >
 </textarea>
 <br/><br/>
@@ -42,7 +43,7 @@
 <br/>
 <br/>
 <div align="center">
-	<input type="button" value="작성 완료" onclick="qnaWrite()" />
+	<input type="button" value="작성 완료" class="redBtn" onclick="qnaWrite()" />
 </div>
 
 </form>

@@ -37,12 +37,16 @@
      	<jsp:useBean id="nows" class="java.util.Date"/>
 
      <div style="color: white;">
-		<c:if test="${login.name ne '' }">
+		<c:if test="${login.id ne '' && login.id != null  }">
 			[${login.name }]님 환영합니다
-		</c:if>
 		<br>
 		<fmt:formatDate var="now" value="${nows }" pattern="yyyy/MM/dd"/>
 		${now }
+		</c:if>
+		
+<%-- 		<c:if test="${login.id eq '' && login.id == null  }">
+				로그인을 해주세요
+		</c:if> --%>
 	</div>
 	
  	<a class="navbar-brand js-scroll-trigger" href="main.do">
@@ -65,7 +69,7 @@
           <a class="nav-link js-scroll-trigger" href="productList.do?category=책상/테이블">책상/테이블</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="productList.do?category=침대/매트릭스">침대/매트릭스</a>
+          <a class="nav-link js-scroll-trigger" href="productList.do?category=침대/매트리스">침대/매트리스</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="productList.do?category=의자/소파">의자/소파</a>

@@ -6,7 +6,7 @@ public class PagingParam implements Serializable {
 	private String s_category;
 	private String s_keyword;
 	private String category;
-	private int recordCountPerPage = 8;	// 표현할 한 페이지의 글수
+	private int recordCountPerPage = 16;	// 표현할 한 페이지의 글수
 	private int pageNumber = 0;	// 페이지 번호
 	private int start = 1;
 	private int end = 10;

@@ -56,7 +56,13 @@
 
 <update id="deliInfoUpdate" parameterType="java.lang.String">
 	UPDATE ORDER_ 
-	SET DELI_INFO=1
+	SET DELI_INFO=2
+	WHERE ORD_SEQ=#{ord_seq}	
+</update>
+
+<update id="deliInfoFix" parameterType="java.lang.String">
+	UPDATE ORDER_ 
+	SET DELI_INFO=3
 	WHERE ORD_SEQ=#{ord_seq}	
 </update>
 

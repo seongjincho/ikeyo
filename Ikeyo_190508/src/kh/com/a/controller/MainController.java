@@ -12,5 +12,26 @@ public class MainController {
 		
 		return "main.tiles";
 	}
+	
+	@RequestMapping(value="privacy1.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String privacy1() {
+		
+		return "privacy1.tiles";
+	}
 
+	
+	@RequestMapping(value="privacy2.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String privacy2() {
+		
+		return "privacy2.tiles";
+	}
+	
+	@RequestMapping(value="brandStory.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String brandStory() {
+		
+		return "brandStory.tiles";
+	}
+	
+	
+	
 }

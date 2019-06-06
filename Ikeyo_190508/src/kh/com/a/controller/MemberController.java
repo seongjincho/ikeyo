@@ -160,7 +160,11 @@ public class MemberController {
 				model.addAttribute("email_check", 0);
 				
 				return "emailConfirm.tiles";
+			} else if(login.getDel() == 1) {
+				
+				return "leave.tiles";
 			}
+			
 			login.setNaver(0);
 			request.getSession().setAttribute("login", login);
 			
@@ -296,20 +300,25 @@ public class MemberController {
 		return "memberlist.tiles";
 	}
 	
-	@RequestMapping(value = "memberdel.do", method= {RequestMethod.GET,RequestMethod.POST})
-	public String memberDel(String id) {
-		
-		boolean isS = memberService.memberDel(id);
-		if(isS) {
-			
-			System.out.println(id + "회원 정보 삭제 성공 ");
-			return "redirect:/memberlist.do";
-		}else {
-			
-			System.out.println(id + "회원 정보 삭제 실패 ");
-			return "redirect:/memberlist.do";
-		}
-		
-	}
+	 @ResponseBody
+	   @RequestMapping(value = "memberdel.do", produces = "application/String; charset=UTF-8", method = RequestMethod.POST)
+	   public String memberDel(String id) {
+	      
+	      boolean isS = memberService.memberDel(id);
+	      String str = "";
+	      if(isS) {
+	         
+	         System.out.println(id + "회원 정보 삭제 성공 ");
+	         str = "삭제 성공";
+	         return str;
+	      }else {
+	         
+	         System.out.println(id + "회원 정보 삭제 실패 ");
+	         str = "실패맨";
+	         return str;
+	      }
+	      
+	   }
+
 	
 }

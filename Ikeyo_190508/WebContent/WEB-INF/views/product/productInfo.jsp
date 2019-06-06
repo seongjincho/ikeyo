@@ -28,7 +28,6 @@ ${pdto.content }
 	<input type="hidden" name="pdf_af" />
 	<input type="hidden" name="model_id" />
 </form>
-<hr/>
 <script>
 function filedowns(pdf_af, model_id) {
 	var doc = document.file_Down;	// name으로 접근하는 방법!

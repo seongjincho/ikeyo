@@ -90,6 +90,31 @@ public class AllOrderController {
 		
 		
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="allorderfix.do", 
+					produces = "application/String; charset=utf-8",
+				   method= {RequestMethod.GET, RequestMethod.POST})
+	public String allorderfix(String ord_seq) {
+		System.out.println("ord_seq:" + ord_seq);
+		boolean isS = allOrderService.deliInfoFix(ord_seq);
+		
+		
+		String msg = "";
+		if(isS) {
+			System.out.println("구매처리 완료");
+			msg = "OK";
+			return msg;  
+			
+		}else {			
+			System.out.println("구매처리 실패");
+			msg = "실패맨";
+			return msg;  
+		}
+		
+		
+	}
 		
 	
 }

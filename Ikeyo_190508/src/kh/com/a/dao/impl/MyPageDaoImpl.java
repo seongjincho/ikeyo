@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import kh.com.a.dao.MyPageDao;
 import kh.com.a.model.MemberDto;
+import kh.com.a.model.Order_Dto;
+import kh.com.a.model.Order_Sub_Dto;
 import kh.com.a.model.PagingParam;
 import kh.com.a.model.ProductDto;
 import kh.com.a.model.QnADto;
@@ -104,5 +106,65 @@ public class MyPageDaoImpl implements MyPageDao {
 		
 		return sqlSession.selectList(ns + "getQnAPagingList", param);
 	}
+	//주문내역 페이지
+	@Override
+	public List<Order_Dto> myorderpage(String id) {
+		return sqlSession.selectList(ns + "myOrderpage", id);
+	}
+
+	@Override
+	public List<Order_Sub_Dto> getMySubOrder(String order_num) {
+		System.out.println("오더넘버: " + order_num);
+		return sqlSession.selectList(ns + "mySubOrder", order_num);
+	}
+
+	@Override
+	public ReviewDto getReviewModal(int seq) {
+		
+		return sqlSession.selectOne(ns + "getReviewModal", seq);
+	}
+	
+	@Override
+	public List<Order_Dto> paymentlist_(String order_num) {
+		return sqlSession.selectList(ns + "paymentlist_", order_num);
+	}
+
+	@Override
+	public boolean plusCountInven(Order_Sub_Dto dto) {
+		int n = sqlSession.update(ns + "plusCountInven", dto);
+		return n>0?true:false;
+	}
+
+	@Override
+	public boolean deleteOrderSub(String order_num) {
+		int n = sqlSession.delete(ns + "deleteOrderSub", order_num);
+		return n>0?true:false;
+	}
+
+	@Override
+	public boolean deleteOrder(String order_num) {
+		int n = sqlSession.delete(ns + "deleteOrder", order_num);
+		return n>0?true:false;
+	}
+
+	@Override
+	public boolean orderFix(String order_num) {
+		int n = sqlSession.update(ns + "orderFix", order_num);
+		return n>0?true:false;
+	}
+	
+	   @Override
+	   public boolean pointGradeUp(MemberDto dto) {
+	      
+	      int n = sqlSession.update(ns + "pointGradeUp", dto);
+	      
+	      return  n>0?true:false;
+	   }
+
+	   @Override
+	   public MemberDto newSession(MemberDto dto) {
+	      
+	      return sqlSession.selectOne(ns + "newSession", dto);
+	   }
 	
 }

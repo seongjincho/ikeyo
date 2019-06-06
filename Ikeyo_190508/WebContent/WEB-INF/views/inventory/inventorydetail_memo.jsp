@@ -50,7 +50,7 @@
 
 <tr>
 	
-	<td align="center"><b>${memo.id}</b><input type="hidden" id="memo_seq" name="memo_seq" value="${memo.memo_seq }">  
+	<td align="center"><b style="font-size: 16px; font-family: 'Noto Sans KR'; font-weight: 800;">${memo.id}</b><input type="hidden" id="memo_seq" name="memo_seq" value="${memo.memo_seq }">  
 	</td> 
 	<td style="margin-left: 10px;">${memo.content }</td>
 	<td><fmt:formatDate value="${memo.rdate }" pattern="yyyy/MM/dd"/></td> 

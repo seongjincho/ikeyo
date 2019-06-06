@@ -47,6 +47,25 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+.btn-ad{
+	width: auto;
+    height: 30px;
+    font-size: 16px;
+}
+
+.redBtn {
+    border: 1px solid #c80a1e;
+    background-color: #c80a1e;
+    color: #fff;
+    width: 205px;
+    height: 40px;
+}
+.font_qna{
+	color: #c80a1e; 
+	font-size: 16px; 
+	font-family: 'Noto Sans KR'; 
+	font-weight: 800;
+}
 
 </style>
 
@@ -59,8 +78,8 @@
 <h3>상품 Q&amp;A</h3>
 </div>
 <div align="right">
-<input type="button" value="상품 Q&A쓰기" id="qnaWrite" <%-- onclick="goWrite('${pdto.model_id}', '${login.id }')" --%>/>
-<input type="button" value="고객지원" onclick="location.href='customlist.do'"/>
+<input type="button" value="상품 Q&A쓰기" class="grayBtn" id="qnaWrite" <%-- onclick="goWrite('${pdto.model_id}', '${login.id }')" --%>/>
+<input type="button" value="고객지원" class="grayBtn" onclick="location.href='customlist.do'"/>
 </div>
 <div align="center">
 <span style="font-size: 14px; color: #aaa;">
@@ -89,20 +108,20 @@
 			
 			<td style="vertical-align: middle; text-align: center;">
 				<c:if test="${qna.answer eq null }">
-					<font style="color: red; font-size: 18px; font-family: 'Noto Sans KR'; font-weight: 800;">접수</font>
+					<font class="font_qna">접수</font>
 				</c:if>
 				<c:if test="${qna.answer ne null }">
-					<font style="color: red; font-size: 18px; font-family: 'Noto Sans KR'; font-weight: 800;">답변완료</font>
+					<font class="font_qna">답변완료</font>
 				</c:if>
 			</td>
 			
-			<td style="vertical-align: middle; padding: 40px 40px 30px 0px;">
+			<td style="vertical-align: middle; padding: 40px 40px 30px 20px;">
 				
 				<input type="hidden" id="qna_seq${vs }"/>
 				<span onclick="qnadetail(${qna.qna_seq})" style="display: inline-block; font-size: 16px; 
 					font-family: 'Noto Sans KR';letter-spacing: -1px;">${qna.title }</span>
 			</td>
-			<td style="vertical-align: middle; padding: 40px 40px 30px 0px; text-align: right;">
+			<td style="vertical-align: middle; padding: 40px 40px 30px 10px; text-align: right;">
 				<!-- 마지막글자 * 처리 -->
 				${fn:substring((qna.id),0,(fn:length(qna.id)-1 )) }*
 			</td>
@@ -113,14 +132,14 @@
 		</tr>
 		
 		<tr id="q${qna.qna_seq }" style="display:none; height: 80px; border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;">
-			<td style="vertical-align: middle; text-align: center;"><font style="color: red; font-size: 18px; font-family: 'Noto Sans KR'; font-weight: 800;">Q</font></td>
+			<td style="vertical-align: middle; text-align: center;"><font class="font_qna">Q</font></td>
 			<td colspan="3"><span>${qna.content }</span></td>
 		</tr>
 		
 		<!-- 답변이 되었을 경우 -->
 		<c:if test="${qna.answer ne null }">
 		<tr id="a${qna.qna_seq }" style="display:none; height: 80px; border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;">
-			<td style="vertical-align: middle; text-align: center;"><font style="color: red; font-size: 18px; font-family: 'Noto Sans KR'; font-weight: 800;">A</font></td>
+			<td style="vertical-align: middle; text-align: center;"><font class="font_qna">A</font></td>
 			<td colspan="2">${qna.answer }</td>
 			<td><fmt:formatDate value="${qna.adate }" pattern="yyyy.MM.dd"/></td>
 		</tr>
@@ -129,16 +148,16 @@
 		<c:if test="${qna.answer eq null and login.auth eq 1}">
 		<tr id="an${qna.qna_seq }" style="display:none; height: 80px; border-top: 1px solid #aaa; border-bottom: 1px solid #aaa;">
 			<td style="vertical-align: middle; text-align: center;">
-			<font style="color: red; font-size: 18px; font-family: 'Noto Sans KR'; font-weight: 800;">답변</font></td>
+			<font class="font_qna">답변</font></td>
 			<td style="vertical-align: middle; text-align: center;">				
 				<form id="_frmAnswer${qna.qna_seq }" action="" method="post">
-				<textarea rows="5" cols="70" name="answer"></textarea>	
+				<textarea rows="5" cols="70" name="answer" id="answer${qna.qna_seq }" style="resize: none;"></textarea>	
 				<input type="hidden" name="qna_seq" id="qna_seq${qna.qna_seq }" value=""/>
 				<input type="hidden" name="model_id" id="qna_model_id${qna.qna_seq }" value="${pdto.model_id }"/>
 				</form>			
 			</td>
 			<td colspan="2">
-				<input type="button" value="답변달기" onclick="answer(${qna.qna_seq})" />
+				<input type="button" value="답변달기" class="grayBtn" onclick="answer(${qna.qna_seq})" />
 			</td>
 		</tr>
 		</c:if>
@@ -151,7 +170,6 @@
 
 </table>
 
-<hr />
 </div>
 <!-- The Modal -->
 <div id="myModal2" class="modal2">
@@ -178,9 +196,6 @@ $(".close2").click(function() {
 });
 
 function qnadetail(qna_seq) {
-	//alert($("#cl"+qna_seq).val());
-	//$("#qna_seq"+qna_seq).val(qna_seq);
-	//alert($("#qna_seq" + qna_seq).val());
 	if($("#cl"+qna_seq).val() == 1 ){
 		$("#q"+qna_seq).hide();
 		$("#a"+qna_seq).hide();
@@ -194,7 +209,13 @@ function qnadetail(qna_seq) {
 	}
 }
 
+// 답글남기기
 function answer(qna_seq) {
+	// 답글을 쓰지 않았을 경우
+	if($("#answer"+qna_seq).val().trim() == null || $("#answer"+qna_seq).val().trim() ==""){
+		alert("답글을 입력해 주세요");
+		return;
+	}
 	$("#qna_seq"+qna_seq).val(qna_seq);
 	//alert($("#qna_seq" + qna_seq).val());
 	$("#_frmAnswer"+qna_seq).attr("action", "qnaAnswer.do").submit();

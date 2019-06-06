@@ -7,11 +7,49 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:requestEncoding value="utf-8"/>
 
-<link rel="stylesheet" href="./css/inventorylist.css" type="text/css"
-	media="print, projection, screen">
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="./jquery/jquery.tablesorter.js"></script>	
-<script type="text/javascript" src="./jquery/jquery.tablesorter.min.js"></script>
+<style>
+.headtitle p {
+    margin-bottom: 70px;
+    padding-top: 130px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+    font-family: 'NanumBarunGothic', 'Nanum Gothic', '돋움', Dotum, sans-serif;
+}
+
+table.noti {
+    width: 80%;
+    border-collapse: collapse;
+    display: table;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+.noti tbody tr{
+	text-align: center;
+}
+
+.noti tbody tr td{
+	border-bottom: 1px solid #f0f0f0;
+    height: 70px;
+    font-size: 15px;
+    /* cursor: pointer; */
+}
+
+.noto th {
+    font-family: 'Noto Sans KR';
+    letter-spacing: -1px;
+    border-top: 1px #aaa solid;
+    border-bottom: 1px solid #f0f0f0;
+    height: 25px;
+    font-size: 13px;
+    color: #aaa;
+    text-align: center;
+}
+
+</style>
 
 
 
@@ -19,16 +57,19 @@
 List<PollDto> plists = (List<PollDto>)request.getAttribute("plists");
 %>
 
-<div align="center" style="margin-left: 10%; margin-right: 10%; margin-top: 10%; margin-bottom: 10%;">
-<h3>투&nbsp;&nbsp;표</h3>
-<hr><br><br>
-<table id="list_table" class="tablesorter" style="width: 95%" border="2">
-<col width="5%"><col width="10%"><col width="30%"><col width="5%">
+<div class="headtitle">
+	<p>투&nbsp;&nbsp;표</p>
+</div>
+
+<div align="center" style="margin-left: 5%; margin-right: 5%; margin-top: 10%; margin-bottom: 10%;">
+
+<table  class="noti">
+<%-- <col width="5%"><col width="10%"><col width="30%"><col width="5%">
 <col width="10%"><col width="10%"><col width="10%">
-<col width="10%"><col width="10%">
+<col width="10%"><col width="10%"> --%>
 
 <thead>
-<tr>
+<tr class="noto">
 	<th>번호</th><th>아이디</th><th>질문</th><th>결과</th>
 	<th>시작일</th><th>종료일</th><th>질문항수</th>
 	<th>투표수</th><th>등록일</th>
@@ -40,7 +81,7 @@ List<PollDto> plists = (List<PollDto>)request.getAttribute("plists");
 	for(int i = 0;i < plists.size(); i++){
 		PollDto poll = plists.get(i);
 		%>
-		<tr bgcolor="#aabbcc">
+		<tr class="_hover_tr">
 			<td align="center"><%=i+1 %></td>
 			<td align="center"><%=poll.getId() %></td>
 			<%

@@ -30,4 +30,6 @@ public interface ProductService {
 	public boolean ordercartDel(String id);		// 바로구매용 삭제
 	public List<CartDto> ordercartSel(String id);	// 바로구매용 찾아오기
 	
+	public boolean productupdate(ProductDto dto);	// 상품 업데이트
+	public boolean productsearch(String model_id);   // 상품등록이 된건지 검색
 }

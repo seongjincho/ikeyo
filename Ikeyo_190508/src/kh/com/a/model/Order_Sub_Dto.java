@@ -42,18 +42,26 @@ public class Order_Sub_Dto {
 	private String model_id;    // 모델id
 	private int count;       // 총 수량
 	private String order_num; // 주문번호
-			
+	private int price;			// 제품가격( 추가 )
+	private String p_name;		// 프로덕트 타이틀( 추가 )
+	
 	public Order_Sub_Dto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order_Sub_Dto(int order_sub_seq, String model_id, int count, String order_num) {
+	
+
+	public Order_Sub_Dto(int order_sub_seq, String model_id, int count, String order_num, int price, String p_name) {
 		super();
 		this.order_sub_seq = order_sub_seq;
 		this.model_id = model_id;
 		this.count = count;
 		this.order_num = order_num;
+		this.price = price;
+		this.p_name = p_name;
 	}
+
+
 
 	public int getOrder_sub_seq() {
 		return order_sub_seq;
@@ -87,11 +95,34 @@ public class Order_Sub_Dto {
 		this.order_num = order_num;
 	}
 
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	
+
+	public String getP_name() {
+		return p_name;
+	}
+
+
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Order_Sub_Dto [order_sub_seq=" + order_sub_seq + ", model_id=" + model_id + ", count=" + count
-				+ ", order_num=" + order_num + "]";
+				+ ", order_num=" + order_num + ", price=" + price + ", p_name=" + p_name + "]";
 	}
-
+	
+	
 
 }
